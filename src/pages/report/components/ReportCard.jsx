@@ -45,6 +45,9 @@ import { addNewComment, editReport } from "../../../redux/action/report";
 import moment from "moment";
 import toast, { Toaster } from "react-hot-toast";
 import MailIcon from "@mui/icons-material/Mail";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import CropFreeIcon from "@mui/icons-material/CropFree";
+import ForumIcon from "@mui/icons-material/Forum";
 
 function stringToColor(string) {
   let hash = 0;
@@ -148,10 +151,11 @@ const ReportCard = ({ dummyReport }) => {
   const cardSx = {
     display: "flex",
     flexDirection: isLargeScreen ? "row" : "column",
-    maxWidth: isLargeScreen ? 590 : 290,
+    maxWidth: isLargeScreen ? 600 : 290,
     margin: "18px",
+    height: "200px",
   };
-  const mediaWidth = isLargeScreen ? 230 : 280;
+  const mediaWidth = isLargeScreen ? 220 : 290;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -216,41 +220,66 @@ const ReportCard = ({ dummyReport }) => {
       <div
         style={{
           display: "flex",
-          margin: "10px",
           backgroundColor: "#0D0D4B",
           color: "white",
-          justifyContent: "center",
-          alignContent: "center",
+          justifyContent: "flex-start",
+          alignContent: "flex-start",
         }}
       >
-        <Typography variant="h4">Edit</Typography>
+        <Typography
+          style={{ marginLeft: "11px", fontSize: "34px", fontWeight: "bold" }}
+        >
+          Edit
+        </Typography>
       </div>
       <Divider />
       <div style={{ marginTop: "20px", marginLeft: "10px" }}>
-        <Stack
-          style={{ marginLeft: "10px" }}
-          flexDirection={"row"}
-          // justifyContent={"space-between"}
-        >
+        <Stack style={{ marginLeft: "10px" }} flexDirection={"row"}>
           <img
             src={dummyReport.imagepath}
             alt="Report Image"
-            width="120"
-            height="80"
+            width="100"
+            height="55"
           />
           <div>
             <div style={{ marginLeft: "12px", marginTop: "0px" }}>
-              <Typography variant="h5">#{dummyReport._id.slice(-3)}</Typography>
-            </div>
-            <div style={{ marginLeft: "12px", marginTop: "6px" }}>
-              <Typography variant="h8">
-                {moment(dummyReport.createdAt).format("DD MMM YYYY hh:mm a")}
+              <Typography variant="h6" style={{ fontWeight: "bolder" }}>
+                #{dummyReport._id.slice(-3)}
               </Typography>
             </div>
             <div style={{ marginLeft: "12px", marginTop: "6px" }}>
-              <Typography variant="h8"> {dummyReport.location}</Typography>
+              <Typography variant="h9">
+                {moment(dummyReport.createdAt).format("DD MMM YYYY hh:mm a")}
+              </Typography>
             </div>
           </div>
+        </Stack>
+        <Divider style={{ marginTop: "16px" }} />
+        <Stack
+          direction={"row"}
+          style={{
+            marginLeft: "30px",
+            marginRight: "30px",
+            marginTop: "10px",
+            justifyContent: "space-between",
+          }}
+        >
+          <Stack direction={"column"}>
+            <Typography
+              style={{ fontSize: "13px", color: "rgba(0, 0, 0, 0.5)" }}
+            >
+              Location
+            </Typography>
+            <Typography>{dummyReport.location}</Typography>
+          </Stack>
+          <Stack direction={"column"}>
+            <Typography
+              style={{ fontSize: "13px", color: "rgba(0, 0, 0, 0.5)" }}
+            >
+              Incident
+            </Typography>
+            <Typography>Driving</Typography>
+          </Stack>
         </Stack>
         <Divider style={{ marginTop: "16px" }} />
 
@@ -313,20 +342,24 @@ const ReportCard = ({ dummyReport }) => {
     <Box
       sx={{
         width: anchor === "top" || anchor === "bottom" ? "auto" : 340,
+        position: "relative",
       }}
       role="presentation"
     >
       <div
         style={{
           display: "flex",
-          margin: "10px",
           backgroundColor: "#0D0D4B",
           color: "white",
-          justifyContent: "center",
-          alignContent: "center",
+          justifyContent: "flex-start",
+          alignContent: "flex-start",
         }}
       >
-        <Typography variant="h4">Comments</Typography>
+        <Typography
+          style={{ marginLeft: "11px", fontSize: "34px", fontWeight: "bold" }}
+        >
+          Comments
+        </Typography>
       </div>
       <Divider />
       <div style={{ marginTop: "20px", marginLeft: "10px" }}>
@@ -334,22 +367,48 @@ const ReportCard = ({ dummyReport }) => {
           <img
             src={dummyReport.imagepath}
             alt="Report Image"
-            width="120"
-            height="80"
+            width="100"
+            height="55"
           />
           <div>
             <div style={{ marginLeft: "12px", marginTop: "0px" }}>
-              <Typography variant="h5">#{dummyReport._id.slice(-3)}</Typography>
-            </div>
-            <div style={{ marginLeft: "12px", marginTop: "6px" }}>
-              <Typography variant="h8">
-                {moment(dummyReport.createdAt).format("DD MMM YYYY hh:mm a")}
+              <Typography variant="h6" style={{ fontWeight: "bolder" }}>
+                #{dummyReport._id.slice(-3)}
               </Typography>
             </div>
             <div style={{ marginLeft: "12px", marginTop: "6px" }}>
-              <Typography variant="h8"> {dummyReport.location}</Typography>
+              <Typography variant="h9">
+                {moment(dummyReport.createdAt).format("DD MMM YYYY hh:mm a")}
+              </Typography>
             </div>
           </div>
+        </Stack>
+        <Divider style={{ marginTop: "16px" }} />
+        <Stack
+          direction={"row"}
+          style={{
+            marginLeft: "30px",
+            marginRight: "30px",
+            marginTop: "10px",
+            justifyContent: "space-between",
+          }}
+        >
+          <Stack direction={"column"}>
+            <Typography
+              style={{ fontSize: "13px", color: "rgba(0, 0, 0, 0.5)" }}
+            >
+              Location
+            </Typography>
+            <Typography>{dummyReport.location}</Typography>
+          </Stack>
+          <Stack direction={"column"}>
+            <Typography
+              style={{ fontSize: "13px", color: "rgba(0, 0, 0, 0.5)" }}
+            >
+              Incident
+            </Typography>
+            <Typography>Driving</Typography>
+          </Stack>
         </Stack>
         <Divider style={{ marginTop: "16px" }} />
 
@@ -379,10 +438,18 @@ const ReportCard = ({ dummyReport }) => {
 
         <div style={{ marginTop: "16px" }}>
           <Stack
-            style={{ margin: "10px" }}
+            style={{
+              marginTop: "10px",
+              marginBottom: "10px",
+              marginLeft: "10px",
+            }}
             flexDirection={"row"}
             alignItems="center"
           >
+            <Avatar
+              {...stringAvatar(String("User"))}
+              style={{ marginRight: "3px" }}
+            />
             <TextareaAutosize
               value={newComment}
               onChange={handleCommentChange}
@@ -418,28 +485,71 @@ const ReportCard = ({ dummyReport }) => {
       <CardMedia
         sx={{
           width: mediaWidth,
-          height: 230,
-          marginLeft: "4px",
-          marginTop: "6px",
+          height: 180,
+          margin: "10px",
           flex: "none",
+          position: "relative",
         }}
         image={dummyReport.imagepath}
         title="green iguana"
-      />
+      >
+        <Chip
+          label={`${dummyReport.tags}`}
+          color={dummyReport.tags === "Fake alert" ? "success" : "success"}
+          // variant="outlined"
+          style={{
+            marginLeft: "-5px",
+            position: "absolute",
+            marginTop: 10,
+            backgroundColor:
+              dummyReport.tags === "Fake alert"
+                ? "rgba(255, 106, 106, 0.7)"
+                : dummyReport.tags === "Near miss"
+                ? "rgba(252, 168, 79, 0.7)"
+                : "rgba(132, 73, 250, 0.7)",
+          }}
+        />
+        <Chip
+          label={`${dummyReport.location}`}
+          color="primary"
+          disabled={false}
+          size="medium"
+          variant="outlined"
+          icon={<FmdGoodIcon />}
+          style={{
+            position: "absolute",
+            bottom: 0,
+            right: 0,
+            marginBottom: "7px",
+            marginLeft: "7px",
+            marginRight: "5px",
+            backgroundColor: "rgba(241, 238, 236, 0.5)",
+            //     : dummyReport.tags === "Near miss"
+            //     ? "rgba(252, 168, 79, 0.7)"
+            //     : "rgba(132, 73, 250, 0.7)",
+          }}
+        />
+      </CardMedia>
       <CardContent>
-        <Stack direction="row" style={{ marginLeft: "10px" }}>
+        <Stack direction="row" style={{ marginLeft: "6px" }}>
           <Box display={"flex"}>
             <Typography gutterBottom variant="h5" component="div">
               #{dummyReport._id.slice(-3)}
             </Typography>
             <Chip
               label={`${dummyReport.status}`}
-              color="success"
-              variant="outlined"
-              style={{ marginLeft: "12px" }}
+              color={
+                dummyReport.status === "Open"
+                  ? "warning"
+                  : dummyReport.status === "Resolved"
+                  ? "success"
+                  : "info"
+              }
+              variant="filled"
+              style={{ marginLeft: "10px" }}
             />
             <IconButton
-              style={{ marginLeft: "14px" }}
+              style={{ marginLeft: "10px" }}
               onClick={() => setOpen(true)}
             >
               <EditIcon />
@@ -481,36 +591,49 @@ const ReportCard = ({ dummyReport }) => {
               {moment(dummyReport.createdAt).format("DD MMM YYYY hh:mm a")}
             </Typography>
           </div>
-          <div style={{ display: "flex", margin: "6px" }}>
-            <Person2Icon fontSize="medium" style={{ marginTop: "2px" }} />
-            <Typography variant="h6" style={{ marginLeft: "8px" }}>
-              {dummyReport.assigned}
-            </Typography>
-          </div>
-
-          <div style={{ display: "flex", marginTop: "6px", marginLeft: "6px" }}>
-            <FmdGoodIcon fontSize="small" style={{ marginTop: "2px" }} />
-            <Typography variant="h7" style={{ marginLeft: "4px" }}>
-              {dummyReport.location}
-            </Typography>
-            <LocalOfferIcon
-              fontSize="small"
-              style={{ marginTop: "2px", marginLeft: "18px" }}
-            />
-            <Typography variant="h7" style={{ marginLeft: "4px" }}>
-              {dummyReport.tags}
-            </Typography>
+          <div
+            style={{
+              display: "flex",
+              margin: "6px",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <CropFreeIcon fontSize="medium" />
+              <Typography
+                variant="h8"
+                style={{ marginLeft: "2px", fontSize: "17px" }}
+              >
+                {"Speed limit"}
+              </Typography>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <PermIdentityIcon fontSize="medium" />
+              <Typography
+                variant="h8"
+                style={{ marginLeft: "2px", fontSize: "17px" }}
+              >
+                {dummyReport.assigned}
+              </Typography>
+            </div>
           </div>
 
           <div style={{ display: "flex", margin: "6px" }}>
             <Button
               variant="text"
-              color="primary"
+              // color="primary"
+              style={{
+                backgroundColor: "white",
+                color: dummyReport.comments.length === 0 ? "blue" : "black",
+              }}
               startIcon={
-                <AddCommentIcon
-                  fontSize="medium"
-                  style={{ marginTop: "2px" }}
-                />
+                <ForumIcon fontSize="medium" style={{ marginTop: "2px" }} />
               }
               onClick={() => {
                 // addComment();
@@ -522,7 +645,9 @@ const ReportCard = ({ dummyReport }) => {
                 variant="h7"
                 style={{ marginLeft: "6px", marginTop: "2px" }}
               >
-                Add Comments
+                {dummyReport.comments && dummyReport.comments.length > 0
+                  ? dummyReport.comments.length + "Comments"
+                  : "Add Comments"}
               </Typography>
             </Button>
           </div>
