@@ -562,6 +562,7 @@ const ReportCard = ({ dummyReport }) => {
                 aria-haspopup="true"
                 aria-expanded={openMenu ? "true" : undefined}
                 onClick={handleOpenMenu}
+                style={{ marginLeft: "-10px" }}
               >
                 <MoreVertIcon />
               </IconButton>
