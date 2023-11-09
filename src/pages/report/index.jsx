@@ -21,6 +21,18 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ReportCard from "./components/ReportCard";
 import { fetchReports, findReports } from "../../redux/action/report";
+import { styled } from "@mui/system";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { SidebarCloseHover } from "../../components/SideBar";
+import download from "../../images/received.png";
+import calendar from "../../images/calendar.png";
+
+const ColoredAutocomplete = styled(Autocomplete)(({ theme }) => ({
+  // You can specify your custom styling here
+  "& .MuiInputBase-input": {
+    color: "blue", // Change the text color to blue
+  },
+}));
 
 // const allReports = [
 //   {
@@ -120,22 +132,16 @@ const ReportPage = () => {
   }, [curLocation, curStatus, curTag, curViolation]);
 
   return (
-    <div
-      style={{
-        margin: "8px",
-        width: "100%",
-        minHeight: "100vh",
-        // display: "flex",
-        // backgroundColor: "#E3E4FF",
-      }}
-    >
-      <Header />
+    <div style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+      <SidebarCloseHover />
       <Stack
+        id="main-div"
         direction="column"
         justifyContent="flex-start"
         alignItems="flex-start"
         spacing={2}
-        margin={"11px"}
+        margin={"13px"}
+        style={{ width: "100%" }}
       >
         <Stack
           direction="row"
@@ -144,18 +150,48 @@ const ReportPage = () => {
           style={{ width: "100%" }}
         >
           <div>
-            <Typography variant="h6">{`Hi, User1`}</Typography>
+            <Typography
+              style={{
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "18px",
+                fontStyle: "noraml",
+                fontWeight: "400px",
+                lineHeight: "32px",
+              }}
+            >{`Hi, User1`}</Typography>
           </div>
           <div
-            style={{ display: "flex", flexDirection: "row", margin: "10px" }}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginLeft: "20px",
+            }}
           >
-            <IconButton>
+            <IconButton style={{ marginLeft: "12px", display: "flex" }}>
               <NotificationsNoneIcon
-                fontSize="large"
-                // style={{ fontSize: "24px" }}
+                style={{
+                  width: "24px",
+                  height: "24px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               />
             </IconButton>
-            <Avatar alt="User1" src={avatare} style={{ marginLeft: "10px" }} />
+            <div>
+              <Avatar
+                alt="User1"
+                src={avatare}
+                style={{
+                  display: "flex",
+                  width: "32px",
+                  height: "32px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "3.561px 3.2px 0px 3.2px",
+                  marginLeft: "11px",
+                }}
+              />
+            </div>
           </div>
         </Stack>
 
@@ -164,17 +200,32 @@ const ReportPage = () => {
           justifyContent="space-between"
           alignItems="flex-start"
           spacing={10}
-          style={{ width: "100%", backgroundColor: "#EFEFFC" }}
+          style={{ width: "100%", backgroundColor: "#F8F8FF" }}
         >
           <div style={{ width: "100%", margin: "9px" }}>
-            <Typography variant="h4">Reports</Typography>
+            <Typography
+              style={{
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "24px",
+                fontStyle: "noraml",
+                fontWeight: "600",
+                lineHeight: "36px",
+                color: "#161C24",
+                margin: "10px",
+              }}
+            >
+              Reports
+            </Typography>
           </div>
 
           <div
             style={{
-              margin: "8px",
+              margin: "15px",
               backgroundColor: "white",
-              width: "calc(100% - 16px)",
+              overflow: "auto",
+              height: "100vh",
+              overflowX: "hidden",
+              // width: "calc(100% - 16px)",
             }}
           >
             <Stack
@@ -182,54 +233,99 @@ const ReportPage = () => {
               justifyContent="flex-start"
               alignItems="flex-start"
               style={{
-                margin: "10px",
+                marginTop: "20px",
+                marginLeft: "20px",
+                marginRigjt: "20px",
+
                 // backgroundColor: "black",
               }}
-              spacing={4}
+              spacing={1}
             >
               <Stack
                 direction="row"
                 justifyContent="space-between"
                 alignItems="flex-start"
                 style={{
-                  marginLeft: "10px",
-                  marginRight: "10px",
+                  // marginLeft: "10px",
+                  // marginRight: "10px",
                   // backgroundColor: "red",
-                  width: "calc(100% - 20px)",
+                  width: "100%",
                 }}
                 spacing={4}
               >
-                <Typography variant="h6">
-                  All Incidents({allReports ? allReports?.length : "0"})
+                <Typography
+                  style={{
+                    fontFamily: "Plus Jakarta Sans",
+                    fontSize: "20px",
+                    fontStyle: "normal",
+                    fontWeight: "500",
+                    lineHeight: "32px",
+                  }}
+                >
+                  All Incidents ({allReports ? allReports?.length : "0"})
                 </Typography>
                 <Stack
                   direction="row"
                   justifyContent="flex-end"
                   alignItems="flex-start"
-                  style={{ margin: "10px" }}
+                  style={{ marginTop: "10px", marginRight: "11px" }}
                   spacing={2}
                 >
                   <Button
                     variant="outlined"
-                    color="primary"
-                    startIcon={<CloudDownloadIcon sx={{ fontSize: 24 }} />}
+                    style={{
+                      color: "#4040F2",
+                      borderColor: "#4040F2",
+                      borderWidth: "1px",
+                      textTransform: "none",
+                    }}
                     // onClick={handleDownload}
                   >
                     Download
+                    <img
+                      src={download}
+                      alt="Download"
+                      style={{
+                        marginRight: "8px",
+                        borderColor: "#4040F2",
+                        borderWidth: "2px",
+                        marginLeft: "6px",
+                      }}
+                    />
                   </Button>
                   {/* <DateRangePicker /> */}
+                  <Button
+                    variant="outlined"
+                    style={{
+                      color: "#4040F2",
+                      borderColor: "#4040F2",
+                      borderWidth: "1px",
+                      textTransform: "none",
+                    }}
+                    // onClick={handleDownload}
+                  >
+                    Calendar
+                    <img
+                      src={calendar}
+                      alt="Calendar"
+                      style={{
+                        marginRight: "8px",
+                        borderColor: "#4040F2",
+                        borderWidth: "2px",
+                        marginLeft: "6px",
+                      }}
+                    />
+                  </Button>
                 </Stack>
               </Stack>
 
               <Stack
                 direction={direction}
-                justifyContent="space-evenly"
-                alignItems="center"
                 style={{
-                  marginLeft: "10px",
-                  marginRight: "10px",
+                  // marginLeft: "10px",
+                  // marginRight: "10px",
                   // backgroundColor: "red",
-                  width: "calc(100% - 20px)",
+                  width: "100%",
                 }}
                 spacing={4}
               >
@@ -237,25 +333,59 @@ const ReportPage = () => {
                   disablePortal
                   id="status"
                   options={status}
-                  sx={{ width: 150 }}
+                  sx={{
+                    width: 93,
+                    borderRadius: 10,
+                    "& .MuiAutocomplete-input": {
+                      height: "20px",
+                    },
+                  }}
                   onChange={(event, value) => {
                     setCurStatus(value);
                   }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Status" />
+                    <TextField
+                      {...params}
+                      label="Status"
+                      sx={{
+                        width: "100%",
+                        borderRadius: 10,
+                      }}
+                    />
                   )}
+                  style={{
+                    backgroundColor: "#F4F6F8",
+                    borderRadius: 10,
+                  }}
                 />
                 <Autocomplete
                   disablePortal
                   id="tags"
                   options={tags}
-                  sx={{ width: 150 }}
+                  sx={{
+                    width: 93,
+                    borderRadius: 10,
+                    "& .MuiAutocomplete-input": {
+                      height: "20px",
+                    },
+                  }}
                   onChange={(event, value) => {
                     setCurTag(value);
                   }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Tag" />
+                    <TextField
+                      {...params}
+                      label="Tag"
+                      sx={{
+                        width: "100%",
+                        borderRadius: 10,
+                      }}
+                    />
                   )}
+                  style={{
+                    backgroundColor: "#F4F6F8",
+                    borderRadius: 10,
+                  }}
                 />
                 <Autocomplete
                   disablePortal
@@ -264,10 +394,27 @@ const ReportPage = () => {
                   onChange={(event, value) => {
                     setCurLocation(value);
                   }}
-                  sx={{ width: 150 }}
+                  sx={{
+                    width: 110,
+                    borderRadius: 10,
+                    "& .MuiAutocomplete-input": {
+                      height: "20px",
+                    },
+                  }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Location" />
+                    <TextField
+                      {...params}
+                      label="Location"
+                      sx={{
+                        width: "100%",
+                        borderRadius: 10,
+                      }}
+                    />
                   )}
+                  style={{
+                    backgroundColor: "#F4F6F8",
+                    borderRadius: 10,
+                  }}
                 />
                 <Autocomplete
                   disablePortal
@@ -276,10 +423,27 @@ const ReportPage = () => {
                   onChange={(event, value) => {
                     setCurLocation(value);
                   }}
-                  sx={{ width: 150 }}
+                  sx={{
+                    width: 110,
+                    borderRadius: 10,
+                    "& .MuiAutocomplete-input": {
+                      height: "20px",
+                    },
+                  }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Violation" />
+                    <TextField
+                      {...params}
+                      label="Violation"
+                      sx={{
+                        width: "100%",
+                        borderRadius: 10,
+                      }}
+                    />
                   )}
+                  style={{
+                    backgroundColor: "#F4F6F8",
+                    borderRadius: 10,
+                  }}
                 />
                 <ToggleButtonGroup
                   color="primary"
@@ -287,21 +451,17 @@ const ReportPage = () => {
                   exclusive
                   onChange={handleChange}
                   aria-label="Platform"
+                  sx={{
+                    backgroundColor: "#F4F6F8",
+                    height: "53px",
+                  }}
                 >
-                  <ToggleButton value="web">Unassigned</ToggleButton>
+                  <ToggleButton value="web">
+                    <span style={{ textTransform: "none" }}>Unassigned</span>
+                  </ToggleButton>
                 </ToggleButtonGroup>
               </Stack>
             </Stack>
-            {/* <div style={{ marginLeft: "15px", marginTop: "35px" }}> */}
-            {/* {allReports &&
-              allReports.length > 0 &&
-              allReports.map((item, index) => (
-                <div style={{ display: "flex" }}>
-                  {" "}
-                  <ReportCard dummyReport={item} />
-                </div>
-              ))} */}
-            {/* </div> */}
 
             {allReports && allReports.length > 0 && (
               <div
@@ -309,10 +469,10 @@ const ReportPage = () => {
                   display: "flex",
                   flexDirection: isBigScreen ? "row" : "column",
                   flexWrap: "wrap",
-                  alignItems: "center",
-                  justifyContent: "space-evenly",
+                  alignItems: "flex-start",
+                  justifyContent: "space-between",
                   // margin: "0 -8px",
-                  margin: "20px",
+                  margin: "10px",
                 }}
               >
                 {allReports.map((item, index) => (
@@ -320,8 +480,8 @@ const ReportPage = () => {
                     key={index}
                     style={{
                       display: "flex",
-                      width: isBigScreen ? "40%" : "100%",
-                      padding: "8px",
+                      // width: isBigScreen ? "40%" : "100%",
+                      justifyContent: "space-between",
                     }}
                   >
                     <ReportCard dummyReport={item} />

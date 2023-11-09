@@ -1,0 +1,1 @@
+export { VuesaxOutlineLogout1 } from "./VuesaxOutlineLogout1";

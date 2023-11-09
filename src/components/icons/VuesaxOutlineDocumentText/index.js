@@ -1,0 +1,1 @@
+export { VuesaxOutlineDocumentText } from "./VuesaxOutlineDocumentText";

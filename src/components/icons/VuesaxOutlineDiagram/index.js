@@ -1,0 +1,1 @@
+export { VuesaxOutlineDiagram } from "./VuesaxOutlineDiagram";

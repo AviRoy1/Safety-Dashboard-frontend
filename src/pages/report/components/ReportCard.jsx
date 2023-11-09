@@ -48,6 +48,20 @@ import MailIcon from "@mui/icons-material/Mail";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import ForumIcon from "@mui/icons-material/Forum";
+import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
+// import "./location.css";
+import locationImage from "./images/location.png";
+import rectangleRed from "./images/RectangleRed.jpg";
+import rectangleViolate from "./images/RectangleViolate.png";
+import rectangleOrange from "./images/RectangleOrange.png";
+import "./tags.css";
+import resolved from "./images/TagResolved.jpg";
+import openIcon from "./images/TagOpen.jpg";
+import inprogress from "./images/TagsInProgress.jpg";
+import editIcon from "./images/edit.png";
+import frame from "./images/frame.jpg";
+import messageIcon from "./images/messagesIcon.jpg";
+import rightIcon from "./images/rightIcon.jpg";
 
 function stringToColor(string) {
   let hash = 0;
@@ -151,11 +165,18 @@ const ReportCard = ({ dummyReport }) => {
   const cardSx = {
     display: "flex",
     flexDirection: isLargeScreen ? "row" : "column",
-    maxWidth: isLargeScreen ? 600 : 290,
-    margin: "18px",
-    height: "200px",
+    maxWidth: isLargeScreen ? 641 : 320,
+    height: isLargeScreen ? "200px" : "380px",
+    // marginBottom: "16px",
+    // marginRight: "30px",
+    border: "1px solid var(--gray-200, #EAECEE)",
+    background: "var(--base-background-white, #FFF)",
+    borderRadius: "8px",
+    // marginTop: "2px",
+    margin: "12px",
+    padding: "14px",
   };
-  const mediaWidth = isLargeScreen ? 220 : 290;
+  const mediaWidth = isLargeScreen ? 290 : 320;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -485,15 +506,55 @@ const ReportCard = ({ dummyReport }) => {
       <CardMedia
         sx={{
           width: mediaWidth,
-          height: 180,
-          margin: "10px",
+          height: 160,
           flex: "none",
           position: "relative",
+          margin: "12px",
         }}
         image={dummyReport.imagepath}
         title="green iguana"
       >
-        <Chip
+        <div
+          style={{
+            height: "32px",
+            width: "94px",
+            position: "relative",
+            marginTop: "12px",
+          }}
+        >
+          <img
+            className="rectangle"
+            alt="Rectangle"
+            src={
+              dummyReport.tags === "Fake alert"
+                ? rectangleRed
+                : dummyReport.tags === "Accident"
+                ? rectangleViolate
+                : rectangleOrange
+            }
+            style={{
+              height: "32px",
+              left: "0",
+              position: "fixed",
+              top: "0",
+              width: "94px",
+              position: "absolute",
+            }}
+          />
+          <Typography
+            style={{
+              position: "absolute",
+              bottom: "0",
+              left: "0",
+              padding: "5px",
+              color: "white",
+              // backgroundColor: "rgba(0, 0, 0, 0.7)",
+            }}
+          >
+            {dummyReport.tags}
+          </Typography>
+        </div>
+        {/* <Chip
           label={`${dummyReport.tags}`}
           color={dummyReport.tags === "Fake alert" ? "success" : "success"}
           // variant="outlined"
@@ -508,35 +569,80 @@ const ReportCard = ({ dummyReport }) => {
                 ? "rgba(252, 168, 79, 0.7)"
                 : "rgba(132, 73, 250, 0.7)",
           }}
-        />
-        <Chip
-          label={`${dummyReport.location}`}
-          color="primary"
-          disabled={false}
-          size="medium"
-          variant="outlined"
-          icon={<FmdGoodIcon />}
+        /> */}
+
+        <div
+          className="frame"
           style={{
             position: "absolute",
             bottom: 0,
             right: 0,
-            marginBottom: "7px",
-            marginLeft: "7px",
+            marginBottom: "10px",
+            marginLeft: "2px",
             marginRight: "5px",
-            backgroundColor: "rgba(241, 238, 236, 0.5)",
-            //     : dummyReport.tags === "Near miss"
-            //     ? "rgba(252, 168, 79, 0.7)"
-            //     : "rgba(132, 73, 250, 0.7)",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            backgroundColor: "rgba(28, 28, 28, 0.6)",
+            backdropFilter: "none", // Set backdropFilter to 'none'
+            borderRadius: "4px",
+            gap: "5",
+            // margin: "10px",
+          }}
+        >
+          {/* <locationImage className="vuesax-outline" /> */}
+          <img src={locationImage} />
+          <div
+            style={{
+              color: "var(--theme-colorswhite)",
+              fontFamily: "var(--paragraph-2-medium-font-family)",
+              fontSize: "var(--paragraph-2-medium-font-size)",
+              fontStyle: "var(--paragraph-2-medium-font-style)",
+              fontWeight: "var(--paragraph-2-medium-font-weight)",
+              letterSpacing: "var(--paragraph-2-medium-letter-spacing)",
+              lineHeight: "var(--paragraph-2-medium-line-height)",
+              /* marginTop: '-1px', */
+              position: "relative",
+              whiteSpace: "nowrap",
+              // width: "fit-content",
+              // marginLeft: "8px",
+            }}
+          >
+            {dummyReport.location}
+          </div>
+        </div>
+
+        <Chip
+          color="primary"
+          disabled={false}
+          size="medium"
+          variant="outlined"
+          icon={<ZoomOutMapIcon />}
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            marginTop: "4px",
+            marginRight: "4px",
+            backgroundColor: "rgba(241, 238, 236, 0.7)",
           }}
         />
       </CardMedia>
       <CardContent>
         <Stack direction="row" style={{ marginLeft: "6px" }}>
           <Box display={"flex"}>
-            <Typography gutterBottom variant="h5" component="div">
-              #{dummyReport._id.slice(-3)}
+            <Typography
+              style={{
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "20px",
+                fontStyle: "normal",
+                fontWeight: "500",
+                lineHeight: "32px",
+              }}
+            >
+              #{dummyReport._id.slice(-4)}
             </Typography>
-            <Chip
+            {/* <Chip
               label={`${dummyReport.status}`}
               color={
                 dummyReport.status === "Open"
@@ -547,55 +653,76 @@ const ReportCard = ({ dummyReport }) => {
               }
               variant="filled"
               style={{ marginLeft: "10px" }}
-            />
+            /> */}
+
+            <div style={{ marginTop: "-9px" }}>
+              <img
+                src={
+                  dummyReport.status === "Resolved"
+                    ? resolved
+                    : dummyReport.status === "Open"
+                    ? openIcon
+                    : inprogress
+                }
+                style={{ margin: "8px" }}
+              />
+            </div>
             <IconButton
-              style={{ marginLeft: "10px" }}
+              style={{ marginLeft: "30px" }}
               onClick={() => setOpen(true)}
             >
-              <EditIcon />
+              {/* <EditIcon /> */}
+              <img src={editIcon} />
             </IconButton>
 
-            <div>
-              <IconButton
-                id="basic-button"
-                aria-controls={openMenu ? "basic-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={openMenu ? "true" : undefined}
-                onClick={handleOpenMenu}
-                style={{ marginLeft: "-10px" }}
-              >
-                <MoreVertIcon />
-              </IconButton>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={openMenu}
-                onClose={handleCloseMenu}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
-              >
-                <MenuItem onClick={handleCloseMenu}>
-                  {" "}
-                  <ListItemIcon>
-                    <MailIcon /> {/* Display the MailIcon */}
-                  </ListItemIcon>{" "}
-                  Mail
-                </MenuItem>
-              </Menu>
-            </div>
+            <IconButton
+              id="basic-button"
+              aria-controls={openMenu ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={openMenu ? "true" : undefined}
+              onClick={handleOpenMenu}
+              style={{ marginLeft: "1px" }}
+            >
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={openMenu}
+              onClose={handleCloseMenu}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              <MenuItem onClick={handleCloseMenu}>
+                {" "}
+                <ListItemIcon>
+                  <MailIcon /> {/* Display the MailIcon */}
+                </ListItemIcon>{" "}
+                Mail
+              </MenuItem>
+            </Menu>
           </Box>
         </Stack>
-        <Stack style={{ margin: "12px" }}>
-          <div style={{ display: "flex", margin: "6px" }}>
-            <Typography variant="h7" style={{ marginBottom: "8px" }}>
-              {moment(dummyReport.createdAt).format("DD MMM YYYY hh:mm a")}
+        <Stack style={{ margin: "8px" }}>
+          <div style={{ display: "flex", marginLeft: "6px" }}>
+            <Typography
+              style={{
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "15px",
+                fontWeight: 400,
+                lineHeight: "20px",
+              }}
+            >
+              {moment(dummyReport.createdAt).format("DD MMM, hh:mm:ss")}
             </Typography>
           </div>
           <div
             style={{
               display: "flex",
-              margin: "6px",
+              marginTop: "14px",
+              marginLeft: "8px",
+              marginRight: "10px",
               flexDirection: "row",
               justifyContent: "space-between",
             }}
@@ -603,8 +730,13 @@ const ReportCard = ({ dummyReport }) => {
             <div style={{ display: "flex", alignItems: "center" }}>
               <CropFreeIcon fontSize="medium" />
               <Typography
-                variant="h8"
-                style={{ marginLeft: "2px", fontSize: "17px" }}
+                style={{
+                  marginLeft: "2px",
+                  fontFamily: "Plus Jakarta Sans",
+                  fontSize: "16px",
+                  fontWeight: 400,
+                  lineHeight: "20px",
+                }}
               >
                 {"Speed limit"}
               </Typography>
@@ -613,19 +745,27 @@ const ReportCard = ({ dummyReport }) => {
               style={{
                 display: "flex",
                 alignItems: "center",
+                marginRight: "10px",
               }}
             >
-              <PermIdentityIcon fontSize="medium" />
+              {/* <PermIdentityIcon fontSize="medium" />
+               */}
+              <img src={frame} />
               <Typography
-                variant="h8"
-                style={{ marginLeft: "2px", fontSize: "17px" }}
+                style={{
+                  marginLeft: "2px",
+                  fontFamily: "Plus Jakarta Sans",
+                  fontSize: "16px",
+                  fontWeight: 400,
+                  lineHeight: "20px",
+                }}
               >
                 {dummyReport.assigned}
               </Typography>
             </div>
           </div>
 
-          <div style={{ display: "flex", margin: "6px" }}>
+          <div style={{ display: "flex", margin: "6px", marginTop: "10px" }}>
             <Button
               variant="text"
               // color="primary"
@@ -634,17 +774,28 @@ const ReportCard = ({ dummyReport }) => {
                 color: dummyReport.comments.length === 0 ? "blue" : "black",
               }}
               startIcon={
-                <ForumIcon fontSize="medium" style={{ marginTop: "2px" }} />
+                // <ForumIcon fontSize="medium" style={{ marginTop: "2px" }} />
+                <img src={messageIcon} />
               }
               onClick={() => {
                 // addComment();
                 setObj(dummyReport);
                 setOpenComment(true);
               }}
+              endIcon={
+                // <ForumIcon fontSize="medium" style={{ marginTop: "2px" }} />
+                <img src={rightIcon} />
+              }
             >
               <Typography
-                variant="h7"
-                style={{ marginLeft: "6px", marginTop: "2px" }}
+                style={{
+                  marginLeft: "6px",
+                  marginTop: "2px",
+                  fontFamily: "Plus Jakarta Sans",
+                  fontSize: "14px",
+                  fontWeight: 400,
+                  lineHeight: "20px",
+                }}
               >
                 {dummyReport.comments && dummyReport.comments.length > 0
                   ? dummyReport.comments.length + "Comments"

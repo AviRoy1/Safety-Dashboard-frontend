@@ -1,0 +1,36 @@
+.frame {
+    align-items: center;
+    background-color: #1b1b1bb2;
+    border-radius: 4px;
+    /* display: inline-flex; */
+    gap: 8px;
+    overflow: hidden;
+    padding: 6px 8px;
+    /* position: "absolute"; */
+            /* bottom: 0;
+            right: 0;
+            marginBottom: "7px";
+            marginLeft: "7px";
+            marginRight: "5px"; */
+  }
+  
+  .frame .vuesax-outline {
+    height: 20px !important;
+    position: relative !important;
+    width: 20px !important;
+  }
+  
+  .frame .text-wrapper {
+    color: var(--theme-colorswhite);
+    font-family: var(--paragraph-2-medium-font-family);
+    font-size: var(--paragraph-2-medium-font-size);
+    font-style: var(--paragraph-2-medium-font-style);
+    font-weight: var(--paragraph-2-medium-font-weight);
+    letter-spacing: var(--paragraph-2-medium-letter-spacing);
+    line-height: var(--paragraph-2-medium-line-height);
+    /* margin-top: -1px; */
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
