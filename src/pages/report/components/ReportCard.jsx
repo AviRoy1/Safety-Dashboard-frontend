@@ -56,12 +56,17 @@ import rectangleViolate from "./images/RectangleViolate.png";
 import rectangleOrange from "./images/RectangleOrange.png";
 import "./tags.css";
 import resolved from "./images/TagResolved.jpg";
-import openIcon from "./images/TagOpen.jpg";
+import openIcon from "./images/TagOpen.png";
 import inprogress from "./images/TagsInProgress.jpg";
 import editIcon from "./images/edit.png";
 import frame from "./images/frame.jpg";
 import messageIcon from "./images/messagesIcon.jpg";
 import rightIcon from "./images/rightIcon.jpg";
+import zoomIcon from "./images/zoom.jpg";
+import emailIcon from "./images/sms.png";
+import mettingIcon from "./images/people.png";
+import closeIcon from "./images/closeIcon.png";
+import dropDownIcon from "./images/dropdown.png";
 
 function stringToColor(string) {
   let hash = 0;
@@ -165,7 +170,7 @@ const ReportCard = ({ dummyReport }) => {
   const cardSx = {
     display: "flex",
     flexDirection: isLargeScreen ? "row" : "column",
-    maxWidth: isLargeScreen ? 641 : 320,
+    maxWidth: isLargeScreen ? 590 : 320,
     height: isLargeScreen ? "200px" : "380px",
     // marginBottom: "16px",
     // marginRight: "30px",
@@ -173,10 +178,12 @@ const ReportCard = ({ dummyReport }) => {
     background: "var(--base-background-white, #FFF)",
     borderRadius: "8px",
     // marginTop: "2px",
-    margin: "12px",
-    padding: "14px",
+    // margin: "12px",
+    marginTop: "10px",
+    marginBottom: "10px",
+    padding: "5px",
   };
-  const mediaWidth = isLargeScreen ? 290 : 320;
+  const mediaWidth = isLargeScreen ? 245 : 320;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -229,6 +236,7 @@ const ReportCard = ({ dummyReport }) => {
     <Box
       sx={{
         width: anchor === "top" || anchor === "bottom" ? "auto" : 340,
+        height: "60px",
         // display: "flex",
         // direction: "column",
         // justifyContent: "space-between",
@@ -241,36 +249,82 @@ const ReportCard = ({ dummyReport }) => {
       <div
         style={{
           display: "flex",
-          backgroundColor: "#0D0D4B",
+          backgroundColor: "#0D0D30",
           color: "white",
           justifyContent: "flex-start",
           alignContent: "flex-start",
+          height: "55px",
         }}
       >
-        <Typography
-          style={{ marginLeft: "11px", fontSize: "34px", fontWeight: "bold" }}
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          style={{ width: "100%" }}
         >
-          Edit
-        </Typography>
+          <Typography
+            style={{
+              marginLeft: "11px",
+              fontFamily: "Plus Jakarta Sans",
+              fontSize: "19px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "24px",
+              margin: "16px",
+            }}
+          >
+            Edit
+          </Typography>
+          <IconButton onClick={toggleDrawer(anchor, false)}>
+            <CloseIcon style={{ color: "white" }} />
+          </IconButton>
+        </Stack>
       </div>
       <Divider />
-      <div style={{ marginTop: "20px", marginLeft: "10px" }}>
-        <Stack style={{ marginLeft: "10px" }} flexDirection={"row"}>
+      <div
+        style={{
+          // marginTop: "20px",
+          // marginLeft: "20px",
+          margin: "14px",
+          backgroundColor: "#F9FAFB",
+          height: "140px",
+        }}
+      >
+        <Stack
+          style={{ marginLeft: "10px", marginTop: "16px" }}
+          flexDirection={"row"}
+        >
           <img
             src={dummyReport.imagepath}
             alt="Report Image"
             width="100"
             height="55"
+            style={{ marginTop: "4px" }}
           />
           <div>
-            <div style={{ marginLeft: "12px", marginTop: "0px" }}>
-              <Typography variant="h6" style={{ fontWeight: "bolder" }}>
-                #{dummyReport._id.slice(-3)}
+            <div style={{ marginLeft: "12px", marginTop: "4px" }}>
+              <Typography
+                style={{
+                  fontFamily: "Plus Jakarta Sans",
+                  fontSize: "18px",
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  lineHeight: "24px",
+                }}
+              >
+                #{dummyReport._id.slice(-4)}
               </Typography>
             </div>
             <div style={{ marginLeft: "12px", marginTop: "6px" }}>
-              <Typography variant="h9">
-                {moment(dummyReport.createdAt).format("DD MMM YYYY hh:mm a")}
+              <Typography
+                style={{
+                  fontFamily: "Plus Jakarta Sans",
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "16px",
+                }}
+              >
+                {moment(dummyReport.createdAt).format("DD MMM YYYY, hh:mm:ss")}
               </Typography>
             </div>
           </div>
@@ -287,25 +341,73 @@ const ReportCard = ({ dummyReport }) => {
         >
           <Stack direction={"column"}>
             <Typography
-              style={{ fontSize: "13px", color: "rgba(0, 0, 0, 0.5)" }}
+              style={{
+                fontSize: "13px",
+                color: "#919EAB",
+                fontFamily: "Plus Jakarta Sans",
+                fontWeight: "400",
+                lineHeight: "16px",
+              }}
             >
               Location
             </Typography>
-            <Typography>{dummyReport.location}</Typography>
+            <Typography
+              style={{
+                fontSize: "15px",
+                color: "black",
+                fontFamily: "Plus Jakarta Sans",
+                fontWeight: "500",
+                lineHeight: "20px",
+              }}
+            >
+              {dummyReport.location}
+            </Typography>
           </Stack>
           <Stack direction={"column"}>
             <Typography
-              style={{ fontSize: "13px", color: "rgba(0, 0, 0, 0.5)" }}
+              style={{
+                fontSize: "13px",
+                color: "#919EAB",
+                fontFamily: "Plus Jakarta Sans",
+                fontWeight: "400",
+                lineHeight: "16px",
+              }}
             >
               Incident
             </Typography>
-            <Typography>Driving</Typography>
+            <Typography
+              style={{
+                fontSize: "15px",
+                color: "black",
+                fontFamily: "Plus Jakarta Sans",
+                fontWeight: "500",
+                lineHeight: "20px",
+              }}
+            >
+              Driving
+            </Typography>
           </Stack>
         </Stack>
-        <Divider style={{ marginTop: "16px" }} />
+        {/* <Divider style={{ marginTop: "16px" }} /> */}
 
-        <div style={{ marginTop: "22px" }}>
-          <Typography style={{ margin: "10px" }}>Status</Typography>
+        <div
+          style={{
+            marginTop: "40px",
+          }}
+        >
+          <Typography
+            style={{
+              margin: "10px",
+              marginTop: "12px",
+              fontFamily: "Plus Jakarta Sans",
+              fontSize: "14px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "20px",
+            }}
+          >
+            Status
+          </Typography>
           <Autocomplete
             style={{ margin: "10px" }}
             disablePortal
@@ -315,47 +417,118 @@ const ReportCard = ({ dummyReport }) => {
             onChange={(event, value) => {
               setStatusCurrent(value);
             }}
-            renderInput={(params) => <TextField {...params} label="Status" />}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Status"
+                sx={{
+                  fontFamily: "Plus Jakarta Sans",
+                  fontSize: "16px",
+                  fontWeight: "400",
+                  lineHeight: "24px",
+                  width: "100%",
+                  border: "none",
+                  outline: "none",
+                  display: "flex",
+                  direction: "column",
+                }}
+                // InputProps={{
+                //   endAdornment: (
+                //     <img
+                //       src={dropDownIcon}
+                //       alt="Dropdown Icon"
+                //       style={{ marginLeft: "64px", marginTop: "7px" }}
+                //     />
+                //   ),
+                // }}
+              />
+            )}
           />
         </div>
-        <Typography style={{ margin: "10px", marginTop: "6px" }}>
-          Tags
-        </Typography>
-        <Autocomplete
-          style={{ margin: "10px" }}
-          disablePortal
-          id="tags"
-          options={tags}
-          sx={{ width: 250 }}
-          onChange={(event, value) => {
-            setTagCurrent(value);
-          }}
-          renderInput={(params) => <TextField {...params} label="Tag" />}
-        />
-        <Typography style={{ margin: "10px", marginTop: "6px" }}>
-          Assign
-        </Typography>
-        <Autocomplete
-          style={{ margin: "10px" }}
-          disablePortal
-          id="assign"
-          options={assign}
-          sx={{ width: 250 }}
-          onChange={(event, value) => {
-            setAssignCurrent(value);
-          }}
-          renderInput={(params) => <TextField {...params} label="Assign" />}
-        />
+        <div>
+          <Typography
+            style={{
+              margin: "10px",
+              marginTop: "10px",
+              fontFamily: "Plus Jakarta Sans",
+              fontSize: "14px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "20px",
+            }}
+          >
+            Tags
+          </Typography>
+          <Autocomplete
+            style={{ margin: "10px" }}
+            disablePortal
+            id="tags"
+            options={tags}
+            sx={{ width: 250 }}
+            onChange={(event, value) => {
+              setTagCurrent(value);
+            }}
+            renderInput={(params) => <TextField {...params} label="Tag" />}
+          />
+        </div>
+        <div>
+          <Typography
+            style={{
+              margin: "10px",
+              marginTop: "13px",
+              fontFamily: "Plus Jakarta Sans",
+              fontSize: "14px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "20px",
+            }}
+          >
+            Assign
+          </Typography>
+          <Autocomplete
+            style={{
+              margin: "10px",
+              marginTop: "10px",
+              fontFamily: "Plus Jakarta Sans",
+              fontSize: "14px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "20px",
+            }}
+            disablePortal
+            id="assign"
+            options={assign}
+            sx={{ width: 250 }}
+            onChange={(event, value) => {
+              setAssignCurrent(value);
+            }}
+            renderInput={(params) => <TextField {...params} label="Assign" />}
+          />
+        </div>
+
+        <div style={{ marginTop: "200px" }}>
+          <Divider />
+          <Button
+            variant="contained"
+            onClick={saveHandler}
+            style={{
+              marginLeft: "230px",
+              marginTop: "16px",
+              backgroundColor: "#4040F2",
+              fontFamily: "Plus Jakarta Sans",
+              fontSize: "14px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "20px",
+            }}
+          >
+            Save
+          </Button>
+        </div>
       </div>
-      <div style={{ marginTop: "100px" }}></div>
-      <Divider />
-      <div
-        style={{ display: "flex", justifyContent: "flex-end", margin: "15px" }}
-      >
-        <Button variant="contained" onClick={saveHandler}>
-          Save
-        </Button>
-      </div>
+
+      {/* <div style={{ marginTop: "100px" }}></div> */}
+      {/* <Divider /> */}
     </Box>
   );
 
@@ -370,36 +543,76 @@ const ReportCard = ({ dummyReport }) => {
       <div
         style={{
           display: "flex",
-          backgroundColor: "#0D0D4B",
+          backgroundColor: "#0D0D30",
           color: "white",
           justifyContent: "flex-start",
           alignContent: "flex-start",
+          height: "55px",
         }}
       >
-        <Typography
-          style={{ marginLeft: "11px", fontSize: "34px", fontWeight: "bold" }}
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          style={{ width: "100%" }}
         >
-          Comments
-        </Typography>
+          <Typography
+            style={{
+              marginLeft: "11px",
+              fontFamily: "Plus Jakarta Sans",
+              fontSize: "19px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "24px",
+              margin: "16px",
+            }}
+          >
+            Comments
+          </Typography>
+          <IconButton onClick={toggleDrawer(anchor, false)}>
+            <CloseIcon style={{ color: "white" }} />
+          </IconButton>
+        </Stack>
       </div>
       <Divider />
-      <div style={{ marginTop: "20px", marginLeft: "10px" }}>
-        <Stack style={{ marginLeft: "10px" }} flexDirection={"row"}>
+      <div
+        style={{ margin: "14px", backgroundColor: "#F9FAFB", height: "140px" }}
+      >
+        <Stack
+          style={{ marginLeft: "10px", marginTop: "16px" }}
+          flexDirection={"row"}
+        >
           <img
             src={dummyReport.imagepath}
             alt="Report Image"
             width="100"
             height="55"
+            style={{ marginTop: "4px" }}
           />
           <div>
-            <div style={{ marginLeft: "12px", marginTop: "0px" }}>
-              <Typography variant="h6" style={{ fontWeight: "bolder" }}>
-                #{dummyReport._id.slice(-3)}
+            <div style={{ marginLeft: "12px", marginTop: "4px" }}>
+              <Typography
+                style={{
+                  fontFamily: "Plus Jakarta Sans",
+                  fontSize: "18px",
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  lineHeight: "24px",
+                }}
+              >
+                #{dummyReport._id.slice(-4)}
               </Typography>
             </div>
             <div style={{ marginLeft: "12px", marginTop: "6px" }}>
-              <Typography variant="h9">
-                {moment(dummyReport.createdAt).format("DD MMM YYYY hh:mm a")}
+              <Typography
+                style={{
+                  fontFamily: "Plus Jakarta Sans",
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "16px",
+                }}
+              >
+                {moment(dummyReport.createdAt).format("DD MMM YYYY hh:mm:ss ")}
               </Typography>
             </div>
           </div>
@@ -416,27 +629,59 @@ const ReportCard = ({ dummyReport }) => {
         >
           <Stack direction={"column"}>
             <Typography
-              style={{ fontSize: "13px", color: "rgba(0, 0, 0, 0.5)" }}
+              style={{
+                fontSize: "13px",
+                color: "#919EAB",
+                fontFamily: "Plus Jakarta Sans",
+                fontWeight: "400",
+                lineHeight: "16px",
+              }}
             >
               Location
             </Typography>
-            <Typography>{dummyReport.location}</Typography>
+            <Typography
+              style={{
+                fontSize: "15px",
+                color: "black",
+                fontFamily: "Plus Jakarta Sans",
+                fontWeight: "500",
+                lineHeight: "20px",
+              }}
+            >
+              {dummyReport.location}
+            </Typography>
           </Stack>
           <Stack direction={"column"}>
             <Typography
-              style={{ fontSize: "13px", color: "rgba(0, 0, 0, 0.5)" }}
+              style={{
+                fontSize: "13px",
+                color: "#919EAB",
+                fontFamily: "Plus Jakarta Sans",
+                fontWeight: "400",
+                lineHeight: "16px",
+              }}
             >
               Incident
             </Typography>
-            <Typography>Driving</Typography>
+            <Typography
+              style={{
+                fontSize: "15px",
+                color: "black",
+                fontFamily: "Plus Jakarta Sans",
+                fontWeight: "500",
+                lineHeight: "20px",
+              }}
+            >
+              Driving
+            </Typography>
           </Stack>
         </Stack>
-        <Divider style={{ marginTop: "16px" }} />
+        {/* <Divider style={{ marginTop: "16px" }} /> */}
 
         {/* Display previous comments */}
         {dummyReport.comments &&
           dummyReport.comments.map((comment, index) => (
-            <div key={index}>
+            <div key={index} style={{ marginTop: "20px" }}>
               <div key={index} style={{ marginTop: 16 }}>
                 <Stack flexDirection={"row"}>
                   <Avatar {...stringAvatar(String(comment.user))} />
@@ -457,7 +702,7 @@ const ReportCard = ({ dummyReport }) => {
             </div>
           ))}
 
-        <div style={{ marginTop: "16px" }}>
+        <div style={{ marginTop: "16px", marginBottom: "20px" }}>
           <Stack
             style={{
               marginTop: "10px",
@@ -481,8 +726,16 @@ const ReportCard = ({ dummyReport }) => {
             />
             <Button
               variant="contained"
-              color="primary"
+              // color="primary"
               onClick={handleAddComment}
+              style={{
+                backgroundColor: "#4040F2",
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "20px",
+              }}
             >
               Send
             </Button>
@@ -537,7 +790,7 @@ const ReportCard = ({ dummyReport }) => {
               left: "0",
               position: "fixed",
               top: "0",
-              width: "94px",
+              width: "90px",
               position: "absolute",
             }}
           />
@@ -578,58 +831,54 @@ const ReportCard = ({ dummyReport }) => {
             bottom: 0,
             right: 0,
             marginBottom: "10px",
-            marginLeft: "2px",
+            // marginLeft: "2px",
             marginRight: "5px",
             display: "flex",
             flexDirection: "row",
-            alignItems: "center",
+            alignItems: "flex-end",
             backgroundColor: "rgba(28, 28, 28, 0.6)",
-            backdropFilter: "none", // Set backdropFilter to 'none'
+            // backdropFilter: "none", // Set backdropFilter to 'none'
             borderRadius: "4px",
-            gap: "5",
-            // margin: "10px",
+            // gap: "5",
+            margin: "10px",
           }}
         >
           {/* <locationImage className="vuesax-outline" /> */}
-          <img src={locationImage} />
-          <div
-            style={{
-              color: "var(--theme-colorswhite)",
-              fontFamily: "var(--paragraph-2-medium-font-family)",
-              fontSize: "var(--paragraph-2-medium-font-size)",
-              fontStyle: "var(--paragraph-2-medium-font-style)",
-              fontWeight: "var(--paragraph-2-medium-font-weight)",
-              letterSpacing: "var(--paragraph-2-medium-letter-spacing)",
-              lineHeight: "var(--paragraph-2-medium-line-height)",
-              /* marginTop: '-1px', */
-              position: "relative",
-              whiteSpace: "nowrap",
-              // width: "fit-content",
-              // marginLeft: "8px",
-            }}
-          >
-            {dummyReport.location}
+          <div style={{ display: "flex", direction: "column" }}>
+            <img src={locationImage} />
+            <Typography
+              style={{
+                color: "white",
+                marginLeft: "8px",
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "14px",
+              }}
+            >
+              {dummyReport?.location}
+            </Typography>
           </div>
         </div>
-
         <Chip
           color="primary"
           disabled={false}
-          size="medium"
+          size="small"
           variant="outlined"
-          icon={<ZoomOutMapIcon />}
+          icon={
+            <ZoomOutMapIcon style={{ marginRight: "-5px", color: "white" }} />
+          }
           style={{
             position: "absolute",
             top: 0,
             right: 0,
             marginTop: "4px",
             marginRight: "4px",
-            backgroundColor: "rgba(241, 238, 236, 0.7)",
+            backgroundColor: "rgba(28, 28, 28, 0.7)",
+            borderRadius: "100%",
           }}
         />
       </CardMedia>
       <CardContent>
-        <Stack direction="row" style={{ marginLeft: "6px" }}>
+        <Stack direction="row" style={{ marginLeft: "0px" }}>
           <Box display={"flex"}>
             <Typography
               style={{
@@ -668,7 +917,7 @@ const ReportCard = ({ dummyReport }) => {
               />
             </div>
             <IconButton
-              style={{ marginLeft: "30px" }}
+              style={{ marginLeft: "26px" }}
               onClick={() => setOpen(true)}
             >
               {/* <EditIcon /> */}
@@ -681,25 +930,31 @@ const ReportCard = ({ dummyReport }) => {
               aria-haspopup="true"
               aria-expanded={openMenu ? "true" : undefined}
               onClick={handleOpenMenu}
-              style={{ marginLeft: "1px" }}
+              style={{ marginLeft: "-3px" }}
             >
               <MoreVertIcon />
             </IconButton>
             <Menu
-              id="basic-menu"
+              // id="basic-menu"
               anchorEl={anchorEl}
               open={openMenu}
               onClose={handleCloseMenu}
               MenuListProps={{
                 "aria-labelledby": "basic-button",
               }}
+              style={{ width: "200px" }}
             >
-              <MenuItem onClick={handleCloseMenu}>
-                {" "}
+              <MenuItem onClick={handleCloseMenu} style={{ width: "200px" }}>
                 <ListItemIcon>
-                  <MailIcon /> {/* Display the MailIcon */}
+                  <img src={emailIcon} />
                 </ListItemIcon>{" "}
                 Mail
+              </MenuItem>
+              <MenuItem onClick={handleCloseMenu}>
+                <ListItemIcon>
+                  <img src={mettingIcon} />
+                </ListItemIcon>{" "}
+                Metting
               </MenuItem>
             </Menu>
           </Box>
@@ -709,7 +964,7 @@ const ReportCard = ({ dummyReport }) => {
             <Typography
               style={{
                 fontFamily: "Plus Jakarta Sans",
-                fontSize: "15px",
+                fontSize: "14px",
                 fontWeight: 400,
                 lineHeight: "20px",
               }}
@@ -795,10 +1050,11 @@ const ReportCard = ({ dummyReport }) => {
                   fontSize: "14px",
                   fontWeight: 400,
                   lineHeight: "20px",
+                  textTransform: "none",
                 }}
               >
                 {dummyReport.comments && dummyReport.comments.length > 0
-                  ? dummyReport.comments.length + "Comments"
+                  ? dummyReport.comments.length + " Comments"
                   : "Add Comments"}
               </Typography>
             </Button>

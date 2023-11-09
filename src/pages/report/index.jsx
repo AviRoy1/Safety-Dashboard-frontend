@@ -26,6 +26,8 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { SidebarCloseHover } from "../../components/SideBar";
 import download from "../../images/received.png";
 import calendar from "../../images/calendar.png";
+import notificationIcon from "./components/images/notification.jpg";
+import dropdown from "./components/images/dropdown.png";
 
 const ColoredAutocomplete = styled(Autocomplete)(({ theme }) => ({
   // You can specify your custom styling here
@@ -132,7 +134,14 @@ const ReportPage = () => {
   }, [curLocation, curStatus, curTag, curViolation]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+        backgroundColor: "#F8F8FF",
+      }}
+    >
       <SidebarCloseHover />
       <Stack
         id="main-div"
@@ -140,8 +149,8 @@ const ReportPage = () => {
         justifyContent="flex-start"
         alignItems="flex-start"
         spacing={2}
-        margin={"13px"}
-        style={{ width: "100%" }}
+        // margin={"13px"}
+        style={{ width: "100%", backgroundColor: "white" }}
       >
         <Stack
           direction="row"
@@ -157,6 +166,7 @@ const ReportPage = () => {
                 fontStyle: "noraml",
                 fontWeight: "400px",
                 lineHeight: "32px",
+                margin: "12px",
               }}
             >{`Hi, User1`}</Typography>
           </div>
@@ -165,17 +175,19 @@ const ReportPage = () => {
               display: "flex",
               flexDirection: "row",
               marginLeft: "20px",
+              margin: "12px",
             }}
           >
             <IconButton style={{ marginLeft: "12px", display: "flex" }}>
-              <NotificationsNoneIcon
+              {/* <NotificationsNoneIcon
                 style={{
                   width: "24px",
                   height: "24px",
                   justifyContent: "center",
                   alignItems: "center",
                 }}
-              />
+              /> */}
+              <img src={notificationIcon} alt="notification.jpg" />
             </IconButton>
             <div>
               <Avatar
@@ -200,7 +212,12 @@ const ReportPage = () => {
           justifyContent="space-between"
           alignItems="flex-start"
           spacing={10}
-          style={{ width: "100%", backgroundColor: "#F8F8FF" }}
+          style={{
+            width: "100%",
+            backgroundColor: "#F8F8FF",
+
+            margin: 0,
+          }}
         >
           <div style={{ width: "100%", margin: "9px" }}>
             <Typography
@@ -262,7 +279,7 @@ const ReportPage = () => {
                     lineHeight: "32px",
                   }}
                 >
-                  All Incidents ({allReports ? allReports?.length : "0"})
+                  All Incidents({allReports ? allReports?.length : "0"})
                 </Typography>
                 <Stack
                   direction="row"
@@ -334,8 +351,7 @@ const ReportPage = () => {
                   id="status"
                   options={status}
                   sx={{
-                    width: 93,
-                    borderRadius: 10,
+                    width: 103,
                     "& .MuiAutocomplete-input": {
                       height: "20px",
                     },
@@ -348,14 +364,31 @@ const ReportPage = () => {
                       {...params}
                       label="Status"
                       sx={{
+                        fontFamily: "Plus Jakarta Sans",
+                        fontSize: "16px",
+                        fontWeight: "400",
+                        lineHeight: "24px",
                         width: "100%",
-                        borderRadius: 10,
+                        border: "none",
+                        outline: "none",
+                        display: "flex",
+                        direction: "column",
                       }}
+                      // InputProps={{
+                      //   endAdornment: (
+                      //     <img
+                      //       src={dropdown}
+                      //       alt="Dropdown Icon"
+                      //       style={{ marginLeft: "54px", marginTop: "7px" }}
+                      //     />
+                      //   ),
+                      // }}
                     />
                   )}
                   style={{
                     backgroundColor: "#F4F6F8",
-                    borderRadius: 10,
+                    border: "none",
+                    outline: "none",
                   }}
                 />
                 <Autocomplete
@@ -377,9 +410,25 @@ const ReportPage = () => {
                       {...params}
                       label="Tag"
                       sx={{
+                        fontFamily: "Plus Jakarta Sans",
+                        fontSize: "16px",
+                        fontWeight: "400",
+                        lineHeight: "24px",
                         width: "100%",
-                        borderRadius: 10,
+                        border: "none",
+                        outline: "none",
+                        display: "flex",
+                        direction: "column",
                       }}
+                      // InputProps={{
+                      //   endAdornment: (
+                      //     <img
+                      //       src={dropdown}
+                      //       alt="Dropdown Icon"
+                      //       style={{ marginLeft: "40px", marginTop: "7px" }}
+                      //     />
+                      //   ),
+                      // }}
                     />
                   )}
                   style={{
@@ -406,9 +455,25 @@ const ReportPage = () => {
                       {...params}
                       label="Location"
                       sx={{
+                        fontFamily: "Plus Jakarta Sans",
+                        fontSize: "16px",
+                        fontWeight: "400",
+                        lineHeight: "24px",
                         width: "100%",
-                        borderRadius: 10,
+                        border: "none",
+                        outline: "none",
+                        display: "flex",
+                        direction: "column",
                       }}
+                      // InputProps={{
+                      //   endAdornment: (
+                      //     <img
+                      //       src={dropdown}
+                      //       alt="Dropdown Icon"
+                      //       style={{ marginLeft: "64px", marginTop: "7px" }}
+                      //     />
+                      //   ),
+                      // }}
                     />
                   )}
                   style={{
@@ -435,9 +500,25 @@ const ReportPage = () => {
                       {...params}
                       label="Violation"
                       sx={{
+                        fontFamily: "Plus Jakarta Sans",
+                        fontSize: "16px",
+                        fontWeight: "400",
+                        lineHeight: "24px",
                         width: "100%",
-                        borderRadius: 10,
+                        border: "none",
+                        outline: "none",
+                        display: "flex",
+                        direction: "column",
                       }}
+                      // InputProps={{
+                      //   endAdornment: (
+                      //     <img
+                      //       src={dropdown}
+                      //       alt="Dropdown Icon"
+                      //       style={{ marginLeft: "66px", marginTop: "7px" }}
+                      //     />
+                      //   ),
+                      // }}
                     />
                   )}
                   style={{
@@ -457,7 +538,15 @@ const ReportPage = () => {
                   }}
                 >
                   <ToggleButton value="web">
-                    <span style={{ textTransform: "none" }}>Unassigned</span>
+                    <span
+                      style={{
+                        textTransform: "none",
+                        fontStyle: "Plus Jakarta Sans",
+                        fontSize: "16px",
+                      }}
+                    >
+                      Unassigned
+                    </span>
                   </ToggleButton>
                 </ToggleButtonGroup>
               </Stack>
@@ -467,7 +556,7 @@ const ReportPage = () => {
               <div
                 style={{
                   display: "flex",
-                  flexDirection: isBigScreen ? "row" : "column",
+                  // flexDirection: isBigScreen ? "row" : "column",
                   flexWrap: "wrap",
                   alignItems: "flex-start",
                   justifyContent: "space-between",
