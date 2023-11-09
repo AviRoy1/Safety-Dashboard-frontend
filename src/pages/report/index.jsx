@@ -2,6 +2,7 @@ import {
   Autocomplete,
   Avatar,
   Container,
+  FormControl,
   IconButton,
   Stack,
   Switch,
@@ -28,6 +29,7 @@ import download from "../../images/received.png";
 import calendar from "../../images/calendar.png";
 import notificationIcon from "./components/images/notification.jpg";
 import dropdown from "./components/images/dropdown.png";
+import userIcon from "./components/images/userIcon.png";
 
 const ColoredAutocomplete = styled(Autocomplete)(({ theme }) => ({
   // You can specify your custom styling here
@@ -118,9 +120,21 @@ const ReportPage = () => {
     { label: "l3", id: 3 },
   ];
   const [alignment, setAlignment] = React.useState("web");
+  const [bgColor, setBGColor] = useState("#F4F6F8");
+  const [color, setColor] = useState("black");
+  const [on, setOn] = useState(false);
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
+    if (on === true) {
+      setBGColor("#ECECFE");
+      setColor("#4040F2");
+      setOn(false);
+    } else {
+      setBGColor("#F4F6F8");
+      setColor("black");
+      setOn(true);
+    }
   };
 
   useEffect(() => {
@@ -175,7 +189,7 @@ const ReportPage = () => {
               display: "flex",
               flexDirection: "row",
               marginLeft: "20px",
-              margin: "12px",
+              margin: "8px",
             }}
           >
             <IconButton style={{ marginLeft: "12px", display: "flex" }}>
@@ -187,10 +201,14 @@ const ReportPage = () => {
                   alignItems: "center",
                 }}
               /> */}
-              <img src={notificationIcon} alt="notification.jpg" />
+              <img
+                src={notificationIcon}
+                alt="notification.jpg"
+                style={{ marginTop: "5px" }}
+              />
             </IconButton>
             <div>
-              <Avatar
+              {/* <Avatar
                 alt="User1"
                 src={avatare}
                 style={{
@@ -201,8 +219,10 @@ const ReportPage = () => {
                   alignItems: "center",
                   padding: "3.561px 3.2px 0px 3.2px",
                   marginLeft: "11px",
+                  marginTop: "7px",
                 }}
-              />
+              /> */}
+              <img src={userIcon} style={{ margin: "9px" }} />
             </div>
           </div>
         </Stack>
@@ -344,188 +364,91 @@ const ReportPage = () => {
                   // backgroundColor: "red",
                   width: "100%",
                 }}
-                spacing={4}
+                spacing={2}
               >
-                <Autocomplete
-                  disablePortal
-                  id="status"
-                  options={status}
-                  sx={{
-                    width: 103,
-                    "& .MuiAutocomplete-input": {
-                      height: "20px",
-                    },
-                  }}
-                  onChange={(event, value) => {
-                    setCurStatus(value);
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Status"
-                      sx={{
-                        fontFamily: "Plus Jakarta Sans",
-                        fontSize: "16px",
-                        fontWeight: "400",
-                        lineHeight: "24px",
-                        width: "100%",
-                        border: "none",
-                        outline: "none",
-                        display: "flex",
-                        direction: "column",
-                      }}
-                      // InputProps={{
-                      //   endAdornment: (
-                      //     <img
-                      //       src={dropdown}
-                      //       alt="Dropdown Icon"
-                      //       style={{ marginLeft: "54px", marginTop: "7px" }}
-                      //     />
-                      //   ),
-                      // }}
-                    />
-                  )}
-                  style={{
-                    backgroundColor: "#F4F6F8",
-                    border: "none",
-                    outline: "none",
-                  }}
-                />
-                <Autocomplete
-                  disablePortal
-                  id="tags"
-                  options={tags}
-                  sx={{
-                    width: 93,
-                    borderRadius: 10,
-                    "& .MuiAutocomplete-input": {
-                      height: "20px",
-                    },
-                  }}
-                  onChange={(event, value) => {
-                    setCurTag(value);
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Tag"
-                      sx={{
-                        fontFamily: "Plus Jakarta Sans",
-                        fontSize: "16px",
-                        fontWeight: "400",
-                        lineHeight: "24px",
-                        width: "100%",
-                        border: "none",
-                        outline: "none",
-                        display: "flex",
-                        direction: "column",
-                      }}
-                      // InputProps={{
-                      //   endAdornment: (
-                      //     <img
-                      //       src={dropdown}
-                      //       alt="Dropdown Icon"
-                      //       style={{ marginLeft: "40px", marginTop: "7px" }}
-                      //     />
-                      //   ),
-                      // }}
-                    />
-                  )}
-                  style={{
-                    backgroundColor: "#F4F6F8",
-                    borderRadius: 10,
-                  }}
-                />
-                <Autocomplete
-                  disablePortal
-                  id="Location"
-                  options={location}
-                  onChange={(event, value) => {
-                    setCurLocation(value);
-                  }}
-                  sx={{
-                    width: 110,
-                    borderRadius: 10,
-                    "& .MuiAutocomplete-input": {
-                      height: "20px",
-                    },
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Location"
-                      sx={{
-                        fontFamily: "Plus Jakarta Sans",
-                        fontSize: "16px",
-                        fontWeight: "400",
-                        lineHeight: "24px",
-                        width: "100%",
-                        border: "none",
-                        outline: "none",
-                        display: "flex",
-                        direction: "column",
-                      }}
-                      // InputProps={{
-                      //   endAdornment: (
-                      //     <img
-                      //       src={dropdown}
-                      //       alt="Dropdown Icon"
-                      //       style={{ marginLeft: "64px", marginTop: "7px" }}
-                      //     />
-                      //   ),
-                      // }}
-                    />
-                  )}
-                  style={{
-                    backgroundColor: "#F4F6F8",
-                    borderRadius: 10,
-                  }}
-                />
-                <Autocomplete
-                  disablePortal
-                  id="Violation"
-                  options={location}
-                  onChange={(event, value) => {
-                    setCurLocation(value);
-                  }}
-                  sx={{
-                    width: 110,
-                    borderRadius: 10,
-                    "& .MuiAutocomplete-input": {
-                      height: "20px",
-                    },
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Violation"
-                      sx={{
-                        fontFamily: "Plus Jakarta Sans",
-                        fontSize: "16px",
-                        fontWeight: "400",
-                        lineHeight: "24px",
-                        width: "100%",
-                        border: "none",
-                        outline: "none",
-                        display: "flex",
-                        direction: "column",
-                      }}
-                      // InputProps={{
-                      //   endAdornment: (
-                      //     <img
-                      //       src={dropdown}
-                      //       alt="Dropdown Icon"
-                      //       style={{ marginLeft: "66px", marginTop: "7px" }}
-                      //     />
-                      //   ),
-                      // }}
-                    />
-                  )}
-                  style={{
-                    backgroundColor: "#F4F6F8",
-                    borderRadius: 10,
-                  }}
-                />
+                <FormControl
+                  style={{ flex: 1, maxWidth: 100 }}
+                  required
+                  size="small"
+                >
+                  <Autocomplete
+                    id="status"
+                    size="small"
+                    style={{ backgroundColor: "#F4F6F8" }}
+                    options={status}
+                    onChange={(event, value) => {
+                      setCurStatus(value);
+                    }}
+                    // defaultValue="All"
+                    renderInput={(params) => (
+                      <TextField {...params} label="Status" />
+                    )}
+                    // style={{ width: "100%", marginRight: "8px" }}
+                  />
+                </FormControl>
+
+                <FormControl
+                  style={{ flex: 1, maxWidth: 100 }}
+                  required
+                  size="small"
+                >
+                  <Autocomplete
+                    id="tag"
+                    size="small"
+                    style={{ backgroundColor: "#F4F6F8" }}
+                    options={tags}
+                    onChange={(event, value) => {
+                      setCurTag(value);
+                    }}
+                    // defaultValue="All"
+                    renderInput={(params) => (
+                      <TextField {...params} label="Tags" />
+                    )}
+                    // style={{ width: "100%", marginRight: "8px" }}
+                  />
+                </FormControl>
+                <FormControl
+                  style={{ flex: 1, maxWidth: 110 }}
+                  required
+                  size="small"
+                >
+                  <Autocomplete
+                    id="location"
+                    size="small"
+                    style={{ backgroundColor: "#F4F6F8" }}
+                    options={location}
+                    onChange={(event, value) => {
+                      setCurLocation(value);
+                    }}
+                    // defaultValue="All"
+                    renderInput={(params) => (
+                      <TextField {...params} label="Location" />
+                    )}
+                    // style={{ width: "100%", marginRight: "8px" }}
+                  />
+                </FormControl>
+
+                <FormControl
+                  style={{ flex: 1, maxWidth: 110 }}
+                  required
+                  size="small"
+                >
+                  <Autocomplete
+                    id="status"
+                    size="small"
+                    style={{ backgroundColor: "#F4F6F8" }}
+                    options={location}
+                    onChange={(event, value) => {
+                      setCurTag(value);
+                    }}
+                    // defaultValue="All"
+                    renderInput={(params) => (
+                      <TextField {...params} label="Violation" />
+                    )}
+                    // style={{ width: "100%", marginRight: "8px" }}
+                  />
+                </FormControl>
+
                 <ToggleButtonGroup
                   color="primary"
                   value={alignment}
@@ -533,16 +456,17 @@ const ReportPage = () => {
                   onChange={handleChange}
                   aria-label="Platform"
                   sx={{
-                    backgroundColor: "#F4F6F8",
-                    height: "53px",
+                    backgroundColor: bgColor,
+                    height: "40px",
                   }}
                 >
-                  <ToggleButton value="web">
+                  <ToggleButton>
                     <span
                       style={{
                         textTransform: "none",
                         fontStyle: "Plus Jakarta Sans",
                         fontSize: "16px",
+                        color: color,
                       }}
                     >
                       Unassigned

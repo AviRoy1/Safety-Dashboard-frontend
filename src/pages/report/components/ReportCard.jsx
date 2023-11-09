@@ -845,11 +845,21 @@ const ReportCard = ({ dummyReport }) => {
         >
           {/* <locationImage className="vuesax-outline" /> */}
           <div style={{ display: "flex", direction: "column" }}>
-            <img src={locationImage} />
+            <img
+              src={locationImage}
+              style={{
+                marginTop: "4px",
+                marginBottom: "4px",
+                marginLeft: "4px",
+              }}
+            />
             <Typography
               style={{
                 color: "white",
                 marginLeft: "8px",
+                marginTop: "4px",
+                marginBottom: "4px",
+                marginRight: "5px",
                 fontFamily: "Plus Jakarta Sans",
                 fontSize: "14px",
               }}
@@ -864,16 +874,21 @@ const ReportCard = ({ dummyReport }) => {
           size="small"
           variant="outlined"
           icon={
-            <ZoomOutMapIcon style={{ marginRight: "-5px", color: "white" }} />
+            <ZoomOutMapIcon style={{ color: "white", marginLeft: "7px" }} />
           }
           style={{
             position: "absolute",
             top: 0,
             right: 0,
-            marginTop: "4px",
-            marginRight: "4px",
+            marginTop: "7px",
+            marginRight: "7px",
             backgroundColor: "rgba(28, 28, 28, 0.7)",
-            borderRadius: "100%",
+            borderRadius: "50%", // Use 50% to create a circular chip
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "27px", // Set a fixed width for the chip
+            height: "27px", // Set a fixed height for the chip
           }}
         />
       </CardMedia>
