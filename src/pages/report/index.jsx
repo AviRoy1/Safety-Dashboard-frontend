@@ -262,7 +262,8 @@ const ReportPage = () => {
               overflow: "auto",
               height: "100vh",
               overflowX: "hidden",
-              // width: "calc(100% - 16px)",
+              // width: "90%",
+              width: "calc(100% - 16px)",
             }}
           >
             <Stack
@@ -374,6 +375,7 @@ const ReportPage = () => {
                   <Autocomplete
                     id="status"
                     size="small"
+                    forcePopupIcon={false}
                     style={{ backgroundColor: "#F4F6F8" }}
                     options={status}
                     onChange={(event, value) => {
@@ -381,7 +383,23 @@ const ReportPage = () => {
                     }}
                     // defaultValue="All"
                     renderInput={(params) => (
-                      <TextField {...params} label="Status" />
+                      <TextField
+                        {...params}
+                        label="Status"
+                        InputProps={{
+                          ...params.InputProps,
+                          endAdornment: (
+                            <span className="contract-search-icon">
+                              <img
+                                src={dropdown}
+                                alt=""
+                                style={{ marginTop: "8px" }}
+                              />
+                            </span>
+                          ),
+                        }}
+                        // variant="standard"
+                      />
                     )}
                     // style={{ width: "100%", marginRight: "8px" }}
                   />
@@ -400,9 +418,25 @@ const ReportPage = () => {
                     onChange={(event, value) => {
                       setCurTag(value);
                     }}
+                    forcePopupIcon={false}
                     // defaultValue="All"
                     renderInput={(params) => (
-                      <TextField {...params} label="Tags" />
+                      <TextField
+                        {...params}
+                        label="Tags"
+                        InputProps={{
+                          ...params.InputProps,
+                          endAdornment: (
+                            <span className="contract-search-icon">
+                              <img
+                                src={dropdown}
+                                alt=""
+                                style={{ marginTop: "8px" }}
+                              />
+                            </span>
+                          ),
+                        }}
+                      />
                     )}
                     // style={{ width: "100%", marginRight: "8px" }}
                   />
@@ -415,6 +449,7 @@ const ReportPage = () => {
                   <Autocomplete
                     id="location"
                     size="small"
+                    forcePopupIcon={false}
                     style={{ backgroundColor: "#F4F6F8" }}
                     options={location}
                     onChange={(event, value) => {
@@ -422,7 +457,22 @@ const ReportPage = () => {
                     }}
                     // defaultValue="All"
                     renderInput={(params) => (
-                      <TextField {...params} label="Location" />
+                      <TextField
+                        {...params}
+                        label="Location"
+                        InputProps={{
+                          ...params.InputProps,
+                          endAdornment: (
+                            <span className="contract-search-icon">
+                              <img
+                                src={dropdown}
+                                alt=""
+                                style={{ marginTop: "8px" }}
+                              />
+                            </span>
+                          ),
+                        }}
+                      />
                     )}
                     // style={{ width: "100%", marginRight: "8px" }}
                   />
@@ -435,6 +485,7 @@ const ReportPage = () => {
                 >
                   <Autocomplete
                     id="status"
+                    forcePopupIcon={false}
                     size="small"
                     style={{ backgroundColor: "#F4F6F8" }}
                     options={location}
@@ -443,7 +494,22 @@ const ReportPage = () => {
                     }}
                     // defaultValue="All"
                     renderInput={(params) => (
-                      <TextField {...params} label="Violation" />
+                      <TextField
+                        {...params}
+                        label="Violation"
+                        InputProps={{
+                          ...params.InputProps,
+                          endAdornment: (
+                            <span className="contract-search-icon">
+                              <img
+                                src={dropdown}
+                                alt=""
+                                style={{ marginTop: "8px" }}
+                              />
+                            </span>
+                          ),
+                        }}
+                      />
                     )}
                     // style={{ width: "100%", marginRight: "8px" }}
                   />
@@ -467,6 +533,7 @@ const ReportPage = () => {
                         fontStyle: "Plus Jakarta Sans",
                         fontSize: "16px",
                         color: color,
+                        fontWeight: "normal",
                       }}
                     >
                       Unassigned
@@ -476,32 +543,35 @@ const ReportPage = () => {
               </Stack>
             </Stack>
 
-            {allReports && allReports.length > 0 && (
-              <div
-                style={{
-                  display: "flex",
-                  // flexDirection: isBigScreen ? "row" : "column",
-                  flexWrap: "wrap",
-                  alignItems: "flex-start",
-                  justifyContent: "space-between",
-                  // margin: "0 -8px",
-                  margin: "10px",
-                }}
-              >
-                {allReports.map((item, index) => (
+            <div
+              style={{
+                display: "flex",
+                // flexDirection: isBigScreen ? "row" : "column",
+                flexWrap: "wrap",
+                alignItems: "flex-start",
+                justifyContent: "space-between",
+                // margin: "0 -8px",
+                margin: "10px",
+              }}
+            >
+              {allReports &&
+                allReports.length > 0 &&
+                allReports.map((item, index) => (
                   <div
                     key={index}
                     style={{
-                      display: "flex",
-                      // width: isBigScreen ? "40%" : "100%",
-                      justifyContent: "space-between",
+                      // display: "flex",
+                      flexBasis: "calc(47.33% )",
+                      width: isBigScreen ? "40%" : "100%",
+                      // justifyContent: "space-between",
+                      boxSizing: "border-box",
+                      margin: "14px",
                     }}
                   >
                     <ReportCard dummyReport={item} />
                   </div>
                 ))}
-              </div>
-            )}
+            </div>
           </div>
         </Stack>
       </Stack>

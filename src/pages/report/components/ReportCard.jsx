@@ -67,6 +67,7 @@ import emailIcon from "./images/sms.png";
 import mettingIcon from "./images/people.png";
 import closeIcon from "./images/closeIcon.png";
 import dropDownIcon from "./images/dropdown.png";
+import noMessageIcon from "./images/messages2.jpg";
 
 function stringToColor(string) {
   let hash = 0;
@@ -127,7 +128,9 @@ const ReportCard = ({ dummyReport }) => {
   function stringAvatar(name) {
     return {
       sx: {
-        bgcolor: stringToColor(name),
+        // bgcolor: stringToColor(name),
+        bgcolor: "#ECECFE",
+        color: "#4040F2",
       },
       children: name.includes(" ")
         ? `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
@@ -170,20 +173,21 @@ const ReportCard = ({ dummyReport }) => {
   const cardSx = {
     display: "flex",
     flexDirection: isLargeScreen ? "row" : "column",
-    maxWidth: isLargeScreen ? 590 : 320,
+    width: isLargeScreen ? "100%" : 320,
     height: isLargeScreen ? "200px" : "380px",
     // marginBottom: "16px",
     // marginRight: "30px",
     border: "1px solid var(--gray-200, #EAECEE)",
     background: "var(--base-background-white, #FFF)",
     borderRadius: "8px",
+    // backgroundColor: "yellow",
     // marginTop: "2px",
     // margin: "12px",
     marginTop: "10px",
     marginBottom: "10px",
     padding: "5px",
   };
-  const mediaWidth = isLargeScreen ? 245 : 320;
+  const mediaWidth = isLargeScreen ? "40%" : 320;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -537,6 +541,8 @@ const ReportCard = ({ dummyReport }) => {
       sx={{
         width: anchor === "top" || anchor === "bottom" ? "auto" : 340,
         position: "relative",
+        // backgroundColor: "black",
+        height: "100%",
       }}
       role="presentation"
     >
@@ -545,9 +551,9 @@ const ReportCard = ({ dummyReport }) => {
           display: "flex",
           backgroundColor: "#0D0D30",
           color: "white",
-          justifyContent: "flex-start",
-          alignContent: "flex-start",
-          height: "55px",
+          justifyContent: "center",
+          alignContent: "center",
+          height: "42px",
         }}
       >
         <Stack
@@ -564,6 +570,8 @@ const ReportCard = ({ dummyReport }) => {
               fontWeight: 500,
               lineHeight: "24px",
               margin: "16px",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             Comments
@@ -573,7 +581,7 @@ const ReportCard = ({ dummyReport }) => {
           </IconButton>
         </Stack>
       </div>
-      <Divider />
+      {/* <Divider /> */}
       <div
         style={{ margin: "14px", backgroundColor: "#F9FAFB", height: "140px" }}
       >
@@ -678,8 +686,7 @@ const ReportCard = ({ dummyReport }) => {
         </Stack>
         {/* <Divider style={{ marginTop: "16px" }} /> */}
 
-        {/* Display previous comments */}
-        {dummyReport.comments &&
+        {/* {dummyReport.comments &&
           dummyReport.comments.map((comment, index) => (
             <div key={index} style={{ marginTop: "20px" }}>
               <div key={index} style={{ marginTop: 16 }}>
@@ -700,9 +707,9 @@ const ReportCard = ({ dummyReport }) => {
               </div>
               <Divider />
             </div>
-          ))}
+          ))} */}
 
-        <div style={{ marginTop: "16px", marginBottom: "20px" }}>
+        {/* <div style={{ marginTop: "16px", marginBottom: "20px" }}>
           <Stack
             style={{
               marginTop: "10px",
@@ -740,8 +747,164 @@ const ReportCard = ({ dummyReport }) => {
               Send
             </Button>
           </Stack>
-        </div>
+        </div> */}
       </div>
+      <Stack
+        direction="column"
+        justifyContent="space-between"
+        alignItems="flex-start"
+        spacing={2}
+        sx={{
+          marginBottom: "34px",
+          height: "73%",
+          flexBasis: "calc(47.33% )",
+        }}
+      >
+        {!dummyReport.comments || dummyReport.comments.length === 0 ? (
+          <>
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+              }}
+            >
+              <img src={noMessageIcon} alt="message.png" />
+              <Typography
+                style={{
+                  fontFamily: "Plus Jakarta Sans",
+                  fontSize: "16px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "24px",
+                }}
+              >
+                No comment added yet!
+              </Typography>
+            </div>
+          </>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              width: "100%",
+            }}
+          >
+            {dummyReport.comments &&
+              dummyReport.comments.map((comment, index) => (
+                <div key={index} style={{ width: "100%" }}>
+                  <div
+                    key={index}
+                    style={{
+                      marginTop: "20px",
+                      margin: "12px",
+                    }}
+                  >
+                    <Stack flexDirection={"row"}>
+                      <Avatar {...stringAvatar(String(comment.user))} />
+                      <div style={{ marginLeft: 16 }}>
+                        <div
+                          style={{
+                            fontFamily: "Plus Jakarta Sans",
+                            fontSize: "16px",
+                            fontStyle: "normal",
+                            fontWeight: 500,
+                            lineHeight: "24px",
+                            color: "#212B36",
+                          }}
+                        >
+                          {comment.user}
+                        </div>
+                        <div
+                          style={{
+                            fontFamily: "Plus Jakarta Sans",
+                            fontSize: "12px",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            lineHeight: "16px",
+                            color: "#919EAB",
+                          }}
+                        >
+                          {moment(comment?.time).format(
+                            "MMM DD, YYYY | hh:mm a"
+                          )}
+                        </div>
+                      </div>
+                    </Stack>
+                    <div
+                      style={{
+                        marginLeft: 56,
+                        marginTop: 10,
+                        fontFamily: "Plus Jakarta Sans",
+                        fontSize: "14px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "20px",
+                        color: "#454F5B",
+                      }}
+                    >
+                      {comment?.message}
+                    </div>
+                  </div>
+                  <Divider style={{ width: "100%" }} />
+                </div>
+              ))}
+          </div>
+        )}
+
+        <div style={{ width: "100%", height: "50px" }}>
+          <Stack
+            direction="row"
+            alignItems="flex-start"
+            style={{
+              // marginBottom: "10px",
+              // marginLeft: "8px",
+              width: "100%",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.4)",
+            }}
+            justifyItems="center"
+          >
+            <Avatar
+              {...stringAvatar(String("User"))}
+              style={{ marginRight: "3px", margin: "10px" }}
+            />
+            <input
+              type="text"
+              style={{
+                height: "60px",
+                border: "none",
+                borderBottom: "0px solid #000",
+                fontSize: "16px",
+                outline: "none",
+                marginLeft: "16px",
+              }}
+              placeholder="Enter text here"
+            />
+            <Button
+              variant="text"
+              style={{
+                fontFamily: "Plus Jakarta Sans",
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "20px",
+                color: "#4040F2",
+                marginTop: "15px",
+                marginRight: "10px",
+              }}
+              onClick={handleAddComment}
+            >
+              Post
+            </Button>
+          </Stack>
+        </div>
+      </Stack>
     </Box>
   );
 
@@ -807,22 +970,6 @@ const ReportCard = ({ dummyReport }) => {
             {dummyReport.tags}
           </Typography>
         </div>
-        {/* <Chip
-          label={`${dummyReport.tags}`}
-          color={dummyReport.tags === "Fake alert" ? "success" : "success"}
-          // variant="outlined"
-          style={{
-            marginLeft: "-5px",
-            position: "absolute",
-            marginTop: 10,
-            backgroundColor:
-              dummyReport.tags === "Fake alert"
-                ? "rgba(255, 106, 106, 0.7)"
-                : dummyReport.tags === "Near miss"
-                ? "rgba(252, 168, 79, 0.7)"
-                : "rgba(132, 73, 250, 0.7)",
-          }}
-        /> */}
 
         <div
           className="frame"
@@ -1054,7 +1201,9 @@ const ReportCard = ({ dummyReport }) => {
               }}
               endIcon={
                 // <ForumIcon fontSize="medium" style={{ marginTop: "2px" }} />
-                <img src={rightIcon} />
+                dummyReport.comments && dummyReport.comments.length > 0 ? (
+                  <img src={rightIcon} />
+                ) : null
               }
             >
               <Typography
