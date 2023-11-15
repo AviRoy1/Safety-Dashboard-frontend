@@ -89,3 +89,74 @@ export const findReports =
       });
     }
   };
+export const fetchTags = () => async (dispatch) => {
+  try {
+    dispatch({ type: "tagfetchRequest" });
+    const { data } = await axios.get(`${server}/report/tags`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
+    dispatch({ type: "tagfetchSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "tagfetchFailed",
+      payload: error.response.data.message,
+    });
+  }
+};
+export const fetchLocations = () => async (dispatch) => {
+  try {
+    dispatch({ type: "locationfetchRequest" });
+    const { data } = await axios.get(`${server}/report/locations`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
+    console.log(data);
+    dispatch({ type: "locationfetchSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "locationfetchFailed",
+      payload: error.response.data.message,
+    });
+  }
+};
+export const fetchStatus = () => async (dispatch) => {
+  try {
+    dispatch({ type: "statusfetchRequest" });
+    const { data } = await axios.get(`${server}/report/status`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
+    console.log(data);
+    dispatch({ type: "statusfetchSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "statusfetchFailed",
+      payload: error.response.data.message,
+    });
+  }
+};
+export const fetchViolationtypes = () => async (dispatch) => {
+  try {
+    dispatch({ type: "violationTypefetchRequest" });
+    const { data } = await axios.get(`${server}/report/violationtypes`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
+    console.log(data);
+    dispatch({ type: "violationTypefetchSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "violationTypefetchFailed",
+      payload: error.response.data.message,
+    });
+  }
+};

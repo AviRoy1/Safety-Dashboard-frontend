@@ -21,7 +21,14 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ReportCard from "./components/ReportCard";
-import { fetchReports, findReports } from "../../redux/action/report";
+import {
+  fetchLocations,
+  fetchReports,
+  fetchStatus,
+  fetchTags,
+  fetchViolationtypes,
+  findReports,
+} from "../../redux/action/report";
 import { styled } from "@mui/system";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { SidebarCloseHover } from "../../components/SideBar";
@@ -38,57 +45,19 @@ const ColoredAutocomplete = styled(Autocomplete)(({ theme }) => ({
   },
 }));
 
-// const allReports = [
-//   {
-//     image:
-//       "https://www.pyrotechworkspace.com/wp-content/uploads/2022/01/01-4.jpg",
-//     tag: "accident",
-//     date: "20th May, 10:15:50",
-//     assign: "User 1",
-//     location: "Control Room",
-//     id: "999",
-//     violationType: "none",
-//     status: "Open",
-//   },
-//   {
-//     image:
-//       "https://www.thechemicalengineer.com/media/16250/emerson2.jpg?&maxwidth=980&center=0.5,0.5&mode=crop&scale=both",
-//     tag: "accident",
-//     date: "20th May, 01:00:50",
-//     assign: "User 22",
-//     location: "Loading Dock",
-//     id: "133",
-//     violationType: "D2",
-//     status: "Resolved",
-//   },
-//   {
-//     image:
-//       "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Control_room_-_Lucens_reactor_-_1968_-_L17-0251-0105.jpg/1200px-Control_room_-_Lucens_reactor_-_1968_-_L17-0251-0105.jpg",
-//     tag: "accident",
-//     date: "20th May, 16:09:50",
-//     assign: "User 11",
-//     location: "Park",
-//     id: "432",
-//     violationType: "none",
-//     status: "In Progress",
-//   },
-//   {
-//     image: "https://www.ceeco.in/img/gallery/control-room1.jpg",
-//     tag: "accident",
-//     date: "20th May, 23:35:50",
-//     assign: "User 16",
-//     location: "Road",
-//     id: "567",
-//     violationType: "D3",
-//     status: "Open",
-//   },
-// ];
-
 const ReportPage = () => {
   // const { isAuthenticated, user, message, error, loading } = useSelector(
   //   (state) => state.user
   // );
-  const { allReports } = useSelector((state) => state.report);
+  const {
+    allReports,
+    allTags,
+    allLocations,
+    allStatus,
+    allViolationType,
+    loading,
+  } = useSelector((state) => state.report);
+  // console.log("allTags- ", allTags);
   const dispatch = useDispatch();
   const isBigScreen = useMediaQuery("(min-width:768px)");
   const [direction, setDirection] = useState("column");
@@ -104,21 +73,17 @@ const ReportPage = () => {
       setDirection("column");
     }
   }, [isBigScreen]);
-  const status = [
-    { label: "Open", id: 1 },
-    { label: "Resolved", id: 2 },
-    { label: "In Progress", id: 2 },
-  ];
-  const tags = [
-    { label: "Fake alert", id: 1 },
-    { label: "Near miss", id: 2 },
-    { label: "Accident", id: 3 },
-  ];
-  const location = [
-    { label: "l1", id: 1 },
-    { label: "l2", id: 2 },
-    { label: "l3", id: 3 },
-  ];
+  // const status = [
+  //   { label: "Open", id: 1 },
+  //   { label: "Resolved", id: 2 },
+  //   { label: "In Progress", id: 2 },
+  // ];
+
+  // const location = [
+  //   { label: "l1", id: 1 },
+  //   { label: "l2", id: 2 },
+  //   { label: "l3", id: 3 },
+  // ];
   const [alignment, setAlignment] = React.useState("web");
   const [bgColor, setBGColor] = useState("#F4F6F8");
   const [color, setColor] = useState("black");
@@ -139,6 +104,10 @@ const ReportPage = () => {
 
   useEffect(() => {
     dispatch(fetchReports());
+    dispatch(fetchTags());
+    dispatch(fetchLocations());
+    dispatch(fetchStatus());
+    dispatch(fetchViolationtypes());
   }, dispatch);
 
   // console.log(allReports);
@@ -147,7 +116,26 @@ const ReportPage = () => {
     dispatch(findReports(curLocation, curStatus, curTag, curViolation));
   }, [curLocation, curStatus, curTag, curViolation]);
 
-  return (
+  const tags = allTags?.map((obj) => ({
+    label: `${obj.name}`,
+    id: `${obj._id}`,
+  }));
+
+  const status = allStatus?.map((obj) => ({
+    label: `${obj.name}`,
+    id: `${obj._id}`,
+  }));
+
+  const location = allLocations?.map((obj) => ({
+    label: `${obj.name}`,
+    id: `${obj._id}`,
+  }));
+  const violation = allViolationType?.map((obj) => ({
+    label: `${obj.name}`,
+    id: `${obj._id}`,
+  }));
+
+  return loading === true ? null : (
     <div
       style={{
         display: "flex",
@@ -193,14 +181,6 @@ const ReportPage = () => {
             }}
           >
             <IconButton style={{ marginLeft: "12px", display: "flex" }}>
-              {/* <NotificationsNoneIcon
-                style={{
-                  width: "24px",
-                  height: "24px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              /> */}
               <img
                 src={notificationIcon}
                 alt="notification.jpg"
@@ -208,20 +188,6 @@ const ReportPage = () => {
               />
             </IconButton>
             <div>
-              {/* <Avatar
-                alt="User1"
-                src={avatare}
-                style={{
-                  display: "flex",
-                  width: "32px",
-                  height: "32px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: "3.561px 3.2px 0px 3.2px",
-                  marginLeft: "11px",
-                  marginTop: "7px",
-                }}
-              /> */}
               <img src={userIcon} style={{ margin: "9px" }} />
             </div>
           </div>
@@ -488,7 +454,7 @@ const ReportPage = () => {
                     forcePopupIcon={false}
                     size="small"
                     style={{ backgroundColor: "#F4F6F8" }}
-                    options={location}
+                    options={violation}
                     onChange={(event, value) => {
                       setCurTag(value);
                     }}

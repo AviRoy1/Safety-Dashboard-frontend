@@ -138,7 +138,7 @@ const ReportCard = ({ dummyReport }) => {
     };
   }
 
-  console.log(dummyReport);
+  // console.log(dummyReport);
   const [state, setState] = React.useState({
     top: false,
     left: false,
