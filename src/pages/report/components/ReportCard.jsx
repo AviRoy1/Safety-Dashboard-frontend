@@ -74,6 +74,7 @@ import noMessageIcon from "./images/messages2.jpg";
 import Column from "antd/es/table/Column";
 import FormControl from "@mui/material/FormControl";
 import { useTheme } from "@mui/material/styles";
+import maximizeIcon from "./images/maximize.jpg";
 
 function stringToColor(string) {
   let hash = 0;
@@ -879,7 +880,7 @@ const ReportCard = ({ dummyReport }) => {
         >
           <Typography
             style={{
-              marginLeft: "11px",
+              marginLeft: "14px",
               fontFamily: "Plus Jakarta Sans",
               fontSize: "19px",
               fontStyle: "normal",
@@ -892,7 +893,7 @@ const ReportCard = ({ dummyReport }) => {
           >
             Comments
           </Typography>
-          <IconButton onClick={toggleDrawer(anchor, false)}>
+          <IconButton onClick={toggleCommentDrawer(anchor, false)}>
             <CloseIcon style={{ color: "white" }} />
           </IconButton>
         </Stack>
@@ -1202,7 +1203,7 @@ const ReportCard = ({ dummyReport }) => {
             }
             style={{
               height: "32px",
-              left: "0",
+              left: "-3px",
               position: "fixed",
               top: "0",
               width: "90px",
@@ -1212,11 +1213,16 @@ const ReportCard = ({ dummyReport }) => {
           <Typography
             style={{
               position: "absolute",
-              bottom: "0",
-              left: "0",
-              // padding: "5px",
-              color: "white",
-              // backgroundColor: "rgba(0, 0, 0, 0.7)",
+              bottom: "2",
+              // marginBottom: "2px",
+              left: "-1",
+              padding: "5px 2px 5px 5px",
+              fontSize: "16px",
+              color: "#FFF",
+              fontFamily: "Plus Jakarta Sans",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "20px",
             }}
           >
             {dummyReport.tags}
@@ -1284,12 +1290,12 @@ const ReportCard = ({ dummyReport }) => {
             marginTop: "7px",
             marginRight: "7px",
             backgroundColor: "rgba(28, 28, 28, 0.7)",
-            borderRadius: "50%", // Use 50% to create a circular chip
+            borderRadius: "50%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            width: "27px", // Set a fixed width for the chip
-            height: "27px", // Set a fixed height for the chip
+            width: "27px",
+            height: "27px",
           }}
         />
       </CardMedia>
@@ -1308,9 +1314,9 @@ const ReportCard = ({ dummyReport }) => {
                 fontFamily: "Plus Jakarta Sans",
                 fontSize: "20px",
                 fontStyle: "normal",
-                fontWeight: "500",
+                fontWeight: "bold",
                 lineHeight: "32px",
-                marginLeft: "4px",
+                marginLeft: "2px",
               }}
             >
               #{dummyReport._id.slice(-4)}
@@ -1325,7 +1331,7 @@ const ReportCard = ({ dummyReport }) => {
                     ? openIcon
                     : inprogress
                 }
-                style={{ margin: "8px" }}
+                style={{ marginLeft: "6px", marginTop: "8px" }}
               />
             </div>
             <Stack width="100%" direction="row" justifyContent="flex-end">
@@ -1372,7 +1378,7 @@ const ReportCard = ({ dummyReport }) => {
               </Menu>
             </Stack>
           </Stack>
-          <Stack style={{ margin: "8px" }}>
+          <Stack style={{ margin: "8px", marginTop: "4px" }}>
             <div style={{ display: "flex", marginLeft: "6px" }}>
               <Typography
                 style={{
@@ -1380,6 +1386,8 @@ const ReportCard = ({ dummyReport }) => {
                   fontSize: "14px",
                   fontWeight: 400,
                   lineHeight: "20px",
+                  color: "#4F5B67",
+                  fontStyle: "normal",
                 }}
               >
                 {moment(dummyReport.createdAt).format("DD MMM, hh:mm:ss")}
@@ -1388,22 +1396,25 @@ const ReportCard = ({ dummyReport }) => {
             <div
               style={{
                 display: "flex",
-                marginTop: "14px",
-                marginLeft: "8px",
+                marginTop: "20px",
+                marginLeft: "6px",
                 marginRight: "10px",
                 flexDirection: "row",
                 justifyContent: "space-between",
               }}
             >
               <div style={{ display: "flex", alignItems: "center" }}>
-                <CropFreeIcon fontSize="medium" />
+                {/* <CropFreeIcon fontSize="medium" /> */}
+                <img src={maximizeIcon} />
                 <Typography
                   style={{
-                    marginLeft: "2px",
+                    marginLeft: "8px",
                     fontFamily: "Plus Jakarta Sans",
                     fontSize: "16px",
                     fontWeight: 400,
-                    lineHeight: "20px",
+                    lineHeight: "24px",
+                    fontStyle: "normal",
+                    color: "#454F5B",
                   }}
                 >
                   {dummyReport.violationType}
@@ -1421,11 +1432,13 @@ const ReportCard = ({ dummyReport }) => {
                 <img src={frame} />
                 <Typography
                   style={{
-                    marginLeft: "2px",
                     fontFamily: "Plus Jakarta Sans",
                     fontSize: "16px",
                     fontWeight: 400,
-                    lineHeight: "20px",
+                    lineHeight: "24px",
+                    fontStyle: "normal",
+                    color: "#454F5B",
+                    marginLeft: "8px",
                   }}
                 >
                   {dummyReport.assigned}
@@ -1433,7 +1446,7 @@ const ReportCard = ({ dummyReport }) => {
               </div>
             </div>
 
-            <div style={{ display: "flex", margin: "6px", marginTop: "10px" }}>
+            <div style={{ display: "flex", margin: "5px", marginTop: "15px" }}>
               <Button
                 variant="text"
                 // color="primary"
@@ -1462,9 +1475,13 @@ const ReportCard = ({ dummyReport }) => {
                     marginLeft: "6px",
                     marginTop: "2px",
                     fontFamily: "Plus Jakarta Sans",
-                    fontSize: "14px",
+                    fontSize: "16px",
                     fontWeight: 400,
-                    lineHeight: "20px",
+                    lineHeight: "24px",
+                    color:
+                      dummyReport && dummyReport.comments.length > 0
+                        ? "#454F5B"
+                        : "#4040F2",
                     textTransform: "none",
                   }}
                 >

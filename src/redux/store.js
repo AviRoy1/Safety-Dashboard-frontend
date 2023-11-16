@@ -11,4 +11,5 @@ const store = configureStore({
 
 export default store;
 
+// export const server = "http://localhost:8100/api/v1";
 export const server = "https://quantic.onrender.com/api/v1";

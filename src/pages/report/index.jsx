@@ -357,6 +357,16 @@ const ReportPage = () => {
                       <TextField
                         {...params}
                         label="Status"
+                        InputLabelProps={{
+                          style: {
+                            fontFamily: "Plus Jakarta Sans",
+                            fontSize: "16px",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            lineHeight: "24px",
+                            color: curStatus === null ? "#454F5B" : "#4040F2",
+                          },
+                        }}
                         InputProps={{
                           ...params.InputProps,
                           endAdornment: (
@@ -393,7 +403,7 @@ const ReportPage = () => {
                     id="tag"
                     size="small"
                     style={{
-                      backgroundColor: curTag === null ? "#F4F6F8" : "#ECECFE",
+                      backgroundColor: curTag === null ? "#F4F6F8" : "#4040F2",
                     }}
                     options={tags}
                     onChange={(event, value) => {
@@ -405,6 +415,16 @@ const ReportPage = () => {
                       <TextField
                         {...params}
                         label="Tags"
+                        InputLabelProps={{
+                          style: {
+                            fontFamily: "Plus Jakarta Sans",
+                            fontSize: "16px",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            lineHeight: "24px",
+                            color: curTag === null ? "#454F5B" : "#4040F2",
+                          },
+                        }}
                         InputProps={{
                           ...params.InputProps,
                           endAdornment: (
@@ -452,6 +472,16 @@ const ReportPage = () => {
                       <TextField
                         {...params}
                         label="Location"
+                        InputLabelProps={{
+                          style: {
+                            fontFamily: "Plus Jakarta Sans",
+                            fontSize: "16px",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            lineHeight: "24px",
+                            color: curLocation === null ? "#454F5B" : "#4040F2",
+                          },
+                        }}
                         InputProps={{
                           ...params.InputProps,
                           endAdornment: (
@@ -500,6 +530,17 @@ const ReportPage = () => {
                       <TextField
                         {...params}
                         label="Violation"
+                        InputLabelProps={{
+                          style: {
+                            fontFamily: "Plus Jakarta Sans",
+                            fontSize: "16px",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            lineHeight: "24px",
+                            color:
+                              curViolation === null ? "#454F5B" : "#4040F2",
+                          },
+                        }}
                         InputProps={{
                           ...params.InputProps,
                           endAdornment: (
@@ -522,7 +563,6 @@ const ReportPage = () => {
                         }}
                       />
                     )}
-                    // style={{ width: "100%", marginRight: "8px" }}
                   />
                 </FormControl>
 
