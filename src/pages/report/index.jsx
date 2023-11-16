@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import React, { useEffect, useState } from "react";
 import Header from "../layout/Header";
 import { useDispatch, useSelector } from "react-redux";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+// import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import avatare from "../../images/avatar.png";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import { DateRangePicker, Grid } from "rsuite";
@@ -37,6 +37,7 @@ import calendar from "../../images/calendar.png";
 import notificationIcon from "./components/images/notification.jpg";
 import dropdown from "./components/images/dropdown.png";
 import userIcon from "./components/images/userIcon.png";
+import rightArrow from "./components/images/rightArrow.jpg";
 
 const ColoredAutocomplete = styled(Autocomplete)(({ theme }) => ({
   // You can specify your custom styling here
@@ -260,10 +261,11 @@ const ReportPage = () => {
                 <Typography
                   style={{
                     fontFamily: "Plus Jakarta Sans",
-                    fontSize: "20px",
+                    fontSize: "18px",
                     fontStyle: "normal",
                     fontWeight: "500",
                     lineHeight: "32px",
+                    color: "#161C24",
                   }}
                 >
                   All Incidents({allReports ? allReports?.length : "0"})
@@ -342,7 +344,10 @@ const ReportPage = () => {
                     id="status"
                     size="small"
                     forcePopupIcon={false}
-                    style={{ backgroundColor: "#F4F6F8" }}
+                    style={{
+                      backgroundColor:
+                        curStatus === null ? "#F4F6F8" : "#ECECFE",
+                    }}
                     options={status}
                     onChange={(event, value) => {
                       setCurStatus(value);
@@ -356,11 +361,19 @@ const ReportPage = () => {
                           ...params.InputProps,
                           endAdornment: (
                             <span className="contract-search-icon">
-                              <img
-                                src={dropdown}
-                                alt=""
-                                style={{ marginTop: "8px" }}
-                              />
+                              {curStatus === null ? (
+                                <img
+                                  src={dropdown}
+                                  alt=""
+                                  style={{ marginTop: "8px" }}
+                                />
+                              ) : (
+                                <img
+                                  src={rightArrow}
+                                  alt=""
+                                  style={{ marginTop: "8px" }}
+                                />
+                              )}
                             </span>
                           ),
                         }}
@@ -379,7 +392,9 @@ const ReportPage = () => {
                   <Autocomplete
                     id="tag"
                     size="small"
-                    style={{ backgroundColor: "#F4F6F8" }}
+                    style={{
+                      backgroundColor: curTag === null ? "#F4F6F8" : "#ECECFE",
+                    }}
                     options={tags}
                     onChange={(event, value) => {
                       setCurTag(value);
@@ -394,11 +409,19 @@ const ReportPage = () => {
                           ...params.InputProps,
                           endAdornment: (
                             <span className="contract-search-icon">
-                              <img
-                                src={dropdown}
-                                alt=""
-                                style={{ marginTop: "8px" }}
-                              />
+                              {curTag === null ? (
+                                <img
+                                  src={dropdown}
+                                  alt=""
+                                  style={{ marginTop: "8px" }}
+                                />
+                              ) : (
+                                <img
+                                  src={rightArrow}
+                                  alt=""
+                                  style={{ marginTop: "8px" }}
+                                />
+                              )}
                             </span>
                           ),
                         }}
@@ -416,7 +439,10 @@ const ReportPage = () => {
                     id="location"
                     size="small"
                     forcePopupIcon={false}
-                    style={{ backgroundColor: "#F4F6F8" }}
+                    style={{
+                      backgroundColor:
+                        curLocation === null ? "#F4F6F8" : "#ECECFE",
+                    }}
                     options={location}
                     onChange={(event, value) => {
                       setCurLocation(value);
@@ -430,11 +456,19 @@ const ReportPage = () => {
                           ...params.InputProps,
                           endAdornment: (
                             <span className="contract-search-icon">
-                              <img
-                                src={dropdown}
-                                alt=""
-                                style={{ marginTop: "8px" }}
-                              />
+                              {curLocation === null ? (
+                                <img
+                                  src={dropdown}
+                                  alt=""
+                                  style={{ marginTop: "8px" }}
+                                />
+                              ) : (
+                                <img
+                                  src={rightArrow}
+                                  alt=""
+                                  style={{ marginTop: "8px" }}
+                                />
+                              )}
                             </span>
                           ),
                         }}
@@ -453,10 +487,13 @@ const ReportPage = () => {
                     id="status"
                     forcePopupIcon={false}
                     size="small"
-                    style={{ backgroundColor: "#F4F6F8" }}
+                    style={{
+                      backgroundColor:
+                        curViolation === null ? "#F4F6F8" : "#ECECFE",
+                    }}
                     options={violation}
                     onChange={(event, value) => {
-                      setCurTag(value);
+                      setCurViolation(value);
                     }}
                     // defaultValue="All"
                     renderInput={(params) => (
@@ -467,11 +504,19 @@ const ReportPage = () => {
                           ...params.InputProps,
                           endAdornment: (
                             <span className="contract-search-icon">
-                              <img
-                                src={dropdown}
-                                alt=""
-                                style={{ marginTop: "8px" }}
-                              />
+                              {curViolation === null ? (
+                                <img
+                                  src={dropdown}
+                                  alt=""
+                                  style={{ marginTop: "8px" }}
+                                />
+                              ) : (
+                                <img
+                                  src={rightArrow}
+                                  alt=""
+                                  style={{ marginTop: "8px" }}
+                                />
+                              )}
                             </span>
                           ),
                         }}
@@ -496,10 +541,12 @@ const ReportPage = () => {
                     <span
                       style={{
                         textTransform: "none",
-                        fontStyle: "Plus Jakarta Sans",
+                        fontFamily: "Plus Jakarta Sans",
                         fontSize: "16px",
-                        color: color,
-                        fontWeight: "normal",
+                        color: "#454F5B",
+                        fontWeight: 400,
+                        lineHeight: "24px",
+                        fontStyle: "normal",
                       }}
                     >
                       Unassigned
@@ -508,7 +555,72 @@ const ReportPage = () => {
                 </ToggleButtonGroup>
               </Stack>
             </Stack>
-
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="flex-start"
+              spacing={3}
+              marginLeft={"20px"}
+              marginTop={"20px"}
+              marginBottom={"-10px"}
+            >
+              {curStatus !== null ? (
+                <Typography
+                  style={{
+                    color: "#919EAB",
+                    fontFamily: "Plus Jakarta Sans",
+                    fontSize: "16px",
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                    lineHeight: "24px",
+                  }}
+                >
+                  {curStatus.label}
+                </Typography>
+              ) : null}
+              {curTag !== null ? (
+                <Typography
+                  style={{
+                    color: "#919EAB",
+                    fontFamily: "Plus Jakarta Sans",
+                    fontSize: "16px",
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                    lineHeight: "24px",
+                  }}
+                >
+                  {curTag.label}
+                </Typography>
+              ) : null}
+              {curLocation !== null ? (
+                <Typography
+                  style={{
+                    color: "#919EAB",
+                    fontFamily: "Plus Jakarta Sans",
+                    fontSize: "16px",
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                    lineHeight: "24px",
+                  }}
+                >
+                  {curLocation.label}
+                </Typography>
+              ) : null}
+              {curViolation !== null ? (
+                <Typography
+                  style={{
+                    color: "#919EAB",
+                    fontFamily: "Plus Jakarta Sans",
+                    fontSize: "16px",
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                    lineHeight: "24px",
+                  }}
+                >
+                  {curViolation.label}
+                </Typography>
+              ) : null}
+            </Stack>
             <div
               style={{
                 display: "flex",
