@@ -394,7 +394,7 @@ const ReportPage = () => {
                   />
                 </FormControl>
 
-                <FormControl
+                {/* <FormControl
                   style={{ flex: 1, maxWidth: 100 }}
                   required
                   size="small"
@@ -403,7 +403,8 @@ const ReportPage = () => {
                     id="tag"
                     size="small"
                     style={{
-                      backgroundColor: curTag === null ? "#F4F6F8" : "#4040F2",
+                        backgroundColor:
+                          curLocation === null ? "#F4F6F8" : "#ECECFE",
                     }}
                     options={tags}
                     onChange={(event, value) => {
@@ -430,6 +431,62 @@ const ReportPage = () => {
                           endAdornment: (
                             <span className="contract-search-icon">
                               {curTag === null ? (
+                                <img
+                                  src={dropdown}
+                                  alt=""
+                                  style={{ marginTop: "8px" }}
+                                />
+                              ) : (
+                                <img
+                                  src={rightArrow}
+                                  alt=""
+                                  style={{ marginTop: "8px" }}
+                                />
+                              )}
+                            </span>
+                          ),
+                        }}
+                      />
+                    )}
+                    // style={{ width: "100%", marginRight: "8px" }}
+                  />
+                </FormControl> */}
+                <FormControl
+                  style={{ flex: 1, maxWidth: 110 }}
+                  required
+                  size="small"
+                >
+                  <Autocomplete
+                    id="location"
+                    size="small"
+                    forcePopupIcon={false}
+                    style={{
+                      backgroundColor: curTag === null ? "#F4F6F8" : "#ECECFE",
+                    }}
+                    options={location}
+                    onChange={(event, value) => {
+                      setCurTag(value);
+                    }}
+                    // defaultValue="All"
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Tags"
+                        InputLabelProps={{
+                          style: {
+                            fontFamily: "Plus Jakarta Sans",
+                            fontSize: "16px",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            lineHeight: "24px",
+                            color: curTag === null ? "#454F5B" : "#4040F2",
+                          },
+                        }}
+                        InputProps={{
+                          ...params.InputProps,
+                          endAdornment: (
+                            <span className="contract-search-icon">
+                              {curLocation === null ? (
                                 <img
                                   src={dropdown}
                                   alt=""
