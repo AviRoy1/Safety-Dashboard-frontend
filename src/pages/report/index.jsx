@@ -335,293 +335,340 @@ const ReportPage = () => {
                 }}
                 spacing={2}
               >
-                <FormControl
-                  style={{ flex: 1, maxWidth: 100 }}
-                  required
-                  size="small"
-                >
-                  <Autocomplete
-                    id="status"
+                <Stack direction="column" spacing={1} width="100px">
+                  <FormControl
+                    style={{ flex: 1, maxWidth: 100 }}
+                    required
                     size="small"
-                    forcePopupIcon={false}
-                    style={{
-                      backgroundColor:
-                        curStatus === null ? "#F4F6F8" : "#ECECFE",
-                    }}
-                    options={status}
-                    onChange={(event, value) => {
-                      setCurStatus(value);
-                    }}
-                    // defaultValue="All"
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Status"
-                        InputLabelProps={{
-                          style: {
-                            fontFamily: "Plus Jakarta Sans",
-                            fontSize: "16px",
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            lineHeight: "24px",
-                            color: curStatus === null ? "#454F5B" : "#4040F2",
+                  >
+                    <Autocomplete
+                      id="status"
+                      size="small"
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: "0",
+                          padding: "1",
+                        },
+                        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                          {
+                            border: "1px solid #eee",
                           },
-                        }}
-                        InputProps={{
-                          ...params.InputProps,
-                          endAdornment: (
-                            <span className="contract-search-icon">
-                              {curStatus === null ? (
-                                <img
-                                  src={dropdown}
-                                  alt=""
-                                  style={{ marginTop: "8px" }}
-                                />
-                              ) : (
-                                <img
-                                  src={rightArrow}
-                                  alt=""
-                                  style={{ marginTop: "8px" }}
-                                />
-                              )}
-                            </span>
-                          ),
-                        }}
-                        // variant="standard"
-                      />
-                    )}
-                    // style={{ width: "100%", marginRight: "8px" }}
-                  />
-                </FormControl>
+                      }}
+                      forcePopupIcon={false}
+                      style={{
+                        backgroundColor:
+                          curStatus === null ? "#F4F6F8" : "#ECECFE",
+                      }}
+                      options={status}
+                      onChange={(event, value) => {
+                        setCurStatus(value);
+                      }}
+                      // defaultValue="All"
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Status"
+                          InputLabelProps={{
+                            style: {
+                              fontFamily: "Plus Jakarta Sans",
+                              fontSize: "16px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "24px",
+                              color: curStatus === null ? "#454F5B" : "#4040F2",
+                            },
+                          }}
+                          InputProps={{
+                            ...params.InputProps,
+                            endAdornment: (
+                              <span className="contract-search-icon">
+                                {curStatus === null ? (
+                                  <img
+                                    src={dropdown}
+                                    alt=""
+                                    style={{ marginTop: "8px" }}
+                                  />
+                                ) : (
+                                  <img
+                                    src={rightArrow}
+                                    alt=""
+                                    style={{ marginTop: "8px" }}
+                                  />
+                                )}
+                              </span>
+                            ),
+                          }}
+                        />
+                      )}
+                    />
+                  </FormControl>
+                  <div>
+                    <Typography
+                      style={{
+                        color: "#919EAB",
+                        fontFamily: "Plus Jakarta Sans",
+                        fontSize: "16px",
+                        fontStyle: "normal",
+                        fontWeight: 500,
+                        lineHeight: "24px",
+                      }}
+                    >
+                      {curStatus !== null ? curStatus.label : null}
+                    </Typography>
+                  </div>
+                </Stack>
 
-                {/* <FormControl
-                  style={{ flex: 1, maxWidth: 100 }}
-                  required
-                  size="small"
-                >
-                  <Autocomplete
-                    id="tag"
+                <Stack direction="column" spacing={1} width="100px">
+                  <FormControl
+                    style={{ flex: 1, maxWidth: 110, border: "none" }}
+                    required
                     size="small"
-                    style={{
+                  >
+                    <Autocomplete
+                      id="tag"
+                      size="small"
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: "0",
+                          padding: "1",
+                        },
+                        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                          {
+                            border: "1px solid #eee",
+                          },
+                      }}
+                      forcePopupIcon={false}
+                      style={{
+                        backgroundColor:
+                          curTag === null ? "#F4F6F8" : "#ECECFE",
+                      }}
+                      options={location}
+                      onChange={(event, value) => {
+                        setCurTag(value);
+                      }}
+                      // defaultValue="All"
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Tags"
+                          InputLabelProps={{
+                            style: {
+                              fontFamily: "Plus Jakarta Sans",
+                              fontSize: "16px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "24px",
+                              color: curTag === null ? "#454F5B" : "#4040F2",
+                            },
+                          }}
+                          InputProps={{
+                            ...params.InputProps,
+                            endAdornment: (
+                              <span className="contract-search-icon">
+                                {curLocation === null ? (
+                                  <img
+                                    src={dropdown}
+                                    alt=""
+                                    style={{ marginTop: "8px" }}
+                                  />
+                                ) : (
+                                  <img
+                                    src={rightArrow}
+                                    alt=""
+                                    style={{ marginTop: "8px" }}
+                                  />
+                                )}
+                              </span>
+                            ),
+                          }}
+                        />
+                      )}
+                    />
+                  </FormControl>
+                  <div>
+                    <Typography
+                      style={{
+                        color: "#919EAB",
+                        fontFamily: "Plus Jakarta Sans",
+                        fontSize: "16px",
+                        fontStyle: "normal",
+                        fontWeight: 500,
+                        lineHeight: "24px",
+                      }}
+                    >
+                      {curTag !== null ? curTag.label : null}
+                    </Typography>
+                  </div>
+                </Stack>
+
+                <Stack direction="column" spacing={1} width="100px">
+                  <FormControl
+                    style={{ flex: 1, maxWidth: 110 }}
+                    required
+                    size="small"
+                  >
+                    <Autocomplete
+                      id="location"
+                      size="small"
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: "0",
+                          padding: "1",
+                        },
+                        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                          {
+                            border: "1px solid #eee",
+                          },
+                      }}
+                      forcePopupIcon={false}
+                      style={{
                         backgroundColor:
                           curLocation === null ? "#F4F6F8" : "#ECECFE",
-                    }}
-                    options={tags}
-                    onChange={(event, value) => {
-                      setCurTag(value);
-                    }}
-                    forcePopupIcon={false}
-                    // defaultValue="All"
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Tags"
-                        InputLabelProps={{
-                          style: {
-                            fontFamily: "Plus Jakarta Sans",
-                            fontSize: "16px",
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            lineHeight: "24px",
-                            color: curTag === null ? "#454F5B" : "#4040F2",
-                          },
-                        }}
-                        InputProps={{
-                          ...params.InputProps,
-                          endAdornment: (
-                            <span className="contract-search-icon">
-                              {curTag === null ? (
-                                <img
-                                  src={dropdown}
-                                  alt=""
-                                  style={{ marginTop: "8px" }}
-                                />
-                              ) : (
-                                <img
-                                  src={rightArrow}
-                                  alt=""
-                                  style={{ marginTop: "8px" }}
-                                />
-                              )}
-                            </span>
-                          ),
-                        }}
-                      />
-                    )}
-                    // style={{ width: "100%", marginRight: "8px" }}
-                  />
-                </FormControl> */}
-                <FormControl
-                  style={{ flex: 1, maxWidth: 110 }}
-                  required
-                  size="small"
-                >
-                  <Autocomplete
-                    id="location"
-                    size="small"
-                    forcePopupIcon={false}
-                    style={{
-                      backgroundColor: curTag === null ? "#F4F6F8" : "#ECECFE",
-                    }}
-                    options={location}
-                    onChange={(event, value) => {
-                      setCurTag(value);
-                    }}
-                    // defaultValue="All"
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Tags"
-                        InputLabelProps={{
-                          style: {
-                            fontFamily: "Plus Jakarta Sans",
-                            fontSize: "16px",
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            lineHeight: "24px",
-                            color: curTag === null ? "#454F5B" : "#4040F2",
-                          },
-                        }}
-                        InputProps={{
-                          ...params.InputProps,
-                          endAdornment: (
-                            <span className="contract-search-icon">
-                              {curLocation === null ? (
-                                <img
-                                  src={dropdown}
-                                  alt=""
-                                  style={{ marginTop: "8px" }}
-                                />
-                              ) : (
-                                <img
-                                  src={rightArrow}
-                                  alt=""
-                                  style={{ marginTop: "8px" }}
-                                />
-                              )}
-                            </span>
-                          ),
-                        }}
-                      />
-                    )}
-                    // style={{ width: "100%", marginRight: "8px" }}
-                  />
-                </FormControl>
-                <FormControl
-                  style={{ flex: 1, maxWidth: 110 }}
-                  required
-                  size="small"
-                >
-                  <Autocomplete
-                    id="location"
-                    size="small"
-                    forcePopupIcon={false}
-                    style={{
-                      backgroundColor:
-                        curLocation === null ? "#F4F6F8" : "#ECECFE",
-                    }}
-                    options={location}
-                    onChange={(event, value) => {
-                      setCurLocation(value);
-                    }}
-                    // defaultValue="All"
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Location"
-                        InputLabelProps={{
-                          style: {
-                            fontFamily: "Plus Jakarta Sans",
-                            fontSize: "16px",
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            lineHeight: "24px",
-                            color: curLocation === null ? "#454F5B" : "#4040F2",
-                          },
-                        }}
-                        InputProps={{
-                          ...params.InputProps,
-                          endAdornment: (
-                            <span className="contract-search-icon">
-                              {curLocation === null ? (
-                                <img
-                                  src={dropdown}
-                                  alt=""
-                                  style={{ marginTop: "8px" }}
-                                />
-                              ) : (
-                                <img
-                                  src={rightArrow}
-                                  alt=""
-                                  style={{ marginTop: "8px" }}
-                                />
-                              )}
-                            </span>
-                          ),
-                        }}
-                      />
-                    )}
-                    // style={{ width: "100%", marginRight: "8px" }}
-                  />
-                </FormControl>
+                      }}
+                      options={location}
+                      onChange={(event, value) => {
+                        setCurLocation(value);
+                      }}
+                      // defaultValue="All"
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Location"
+                          InputLabelProps={{
+                            style: {
+                              fontFamily: "Plus Jakarta Sans",
+                              fontSize: "16px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "24px",
+                              color:
+                                curLocation === null ? "#454F5B" : "#4040F2",
+                            },
+                          }}
+                          InputProps={{
+                            ...params.InputProps,
+                            endAdornment: (
+                              <span className="contract-search-icon">
+                                {curLocation === null ? (
+                                  <img
+                                    src={dropdown}
+                                    alt=""
+                                    style={{ marginTop: "8px" }}
+                                  />
+                                ) : (
+                                  <img
+                                    src={rightArrow}
+                                    alt=""
+                                    style={{ marginTop: "8px" }}
+                                  />
+                                )}
+                              </span>
+                            ),
+                          }}
+                        />
+                      )}
+                      // style={{ width: "100%", marginRight: "8px" }}
+                    />
+                  </FormControl>
+                  <div>
+                    <Typography
+                      style={{
+                        color: "#919EAB",
+                        fontFamily: "Plus Jakarta Sans",
+                        fontSize: "16px",
+                        fontStyle: "normal",
+                        fontWeight: 500,
+                        lineHeight: "24px",
+                      }}
+                    >
+                      {curLocation !== null ? curLocation.label : null}
+                    </Typography>
+                  </div>
+                </Stack>
 
-                <FormControl
-                  style={{ flex: 1, maxWidth: 110 }}
-                  required
-                  size="small"
-                >
-                  <Autocomplete
-                    id="status"
-                    forcePopupIcon={false}
+                <Stack direction="column" spacing={1} width="100px">
+                  <FormControl
+                    style={{ flex: 1, maxWidth: 110 }}
+                    required
                     size="small"
-                    style={{
-                      backgroundColor:
-                        curViolation === null ? "#F4F6F8" : "#ECECFE",
-                    }}
-                    options={violation}
-                    onChange={(event, value) => {
-                      setCurViolation(value);
-                    }}
-                    // defaultValue="All"
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Violation"
-                        InputLabelProps={{
-                          style: {
-                            fontFamily: "Plus Jakarta Sans",
-                            fontSize: "16px",
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            lineHeight: "24px",
-                            color:
-                              curViolation === null ? "#454F5B" : "#4040F2",
+                  >
+                    <Autocomplete
+                      id="status"
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: "0",
+                          padding: "1",
+                        },
+                        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                          {
+                            border: "1px solid #eee",
                           },
-                        }}
-                        InputProps={{
-                          ...params.InputProps,
-                          endAdornment: (
-                            <span className="contract-search-icon">
-                              {curViolation === null ? (
-                                <img
-                                  src={dropdown}
-                                  alt=""
-                                  style={{ marginTop: "8px" }}
-                                />
-                              ) : (
-                                <img
-                                  src={rightArrow}
-                                  alt=""
-                                  style={{ marginTop: "8px" }}
-                                />
-                              )}
-                            </span>
-                          ),
-                        }}
-                      />
-                    )}
-                  />
-                </FormControl>
+                      }}
+                      forcePopupIcon={false}
+                      size="small"
+                      style={{
+                        backgroundColor:
+                          curViolation === null ? "#F4F6F8" : "#ECECFE",
+                      }}
+                      options={violation}
+                      onChange={(event, value) => {
+                        setCurViolation(value);
+                      }}
+                      // defaultValue="All"
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Violation"
+                          InputLabelProps={{
+                            style: {
+                              fontFamily: "Plus Jakarta Sans",
+                              fontSize: "16px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "24px",
+                              color:
+                                curViolation === null ? "#454F5B" : "#4040F2",
+                            },
+                          }}
+                          InputProps={{
+                            ...params.InputProps,
+                            endAdornment: (
+                              <span className="contract-search-icon">
+                                {curViolation === null ? (
+                                  <img
+                                    src={dropdown}
+                                    alt=""
+                                    style={{ marginTop: "8px" }}
+                                  />
+                                ) : (
+                                  <img
+                                    src={rightArrow}
+                                    alt=""
+                                    style={{ marginTop: "8px" }}
+                                  />
+                                )}
+                              </span>
+                            ),
+                          }}
+                        />
+                      )}
+                    />
+                  </FormControl>
+                  <div>
+                    <Typography
+                      style={{
+                        color: "#919EAB",
+                        fontFamily: "Plus Jakarta Sans",
+                        fontSize: "16px",
+                        fontStyle: "normal",
+                        fontWeight: 500,
+                        lineHeight: "24px",
+                      }}
+                    >
+                      {curViolation !== null ? curViolation.label : null}
+                    </Typography>
+                  </div>
+                </Stack>
 
                 <ToggleButtonGroup
                   color="primary"
@@ -632,9 +679,28 @@ const ReportPage = () => {
                   sx={{
                     backgroundColor: bgColor,
                     height: "40px",
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "0",
+                      padding: "1",
+                    },
+                    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                      {
+                        border: "1px solid #eee",
+                      },
                   }}
                 >
-                  <ToggleButton>
+                  <ToggleButton
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: "0",
+                        padding: "1",
+                      },
+                      "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                        {
+                          border: "1px solid #eee",
+                        },
+                    }}
+                  >
                     <span
                       style={{
                         textTransform: "none",
@@ -644,6 +710,7 @@ const ReportPage = () => {
                         fontWeight: 400,
                         lineHeight: "24px",
                         fontStyle: "normal",
+                        border: 0,
                       }}
                     >
                       Unassigned
@@ -652,72 +719,7 @@ const ReportPage = () => {
                 </ToggleButtonGroup>
               </Stack>
             </Stack>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="flex-start"
-              spacing={3}
-              marginLeft={"20px"}
-              marginTop={"20px"}
-              marginBottom={"-10px"}
-            >
-              {curStatus !== null ? (
-                <Typography
-                  style={{
-                    color: "#919EAB",
-                    fontFamily: "Plus Jakarta Sans",
-                    fontSize: "16px",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "24px",
-                  }}
-                >
-                  {curStatus.label}
-                </Typography>
-              ) : null}
-              {curTag !== null ? (
-                <Typography
-                  style={{
-                    color: "#919EAB",
-                    fontFamily: "Plus Jakarta Sans",
-                    fontSize: "16px",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "24px",
-                  }}
-                >
-                  {curTag.label}
-                </Typography>
-              ) : null}
-              {curLocation !== null ? (
-                <Typography
-                  style={{
-                    color: "#919EAB",
-                    fontFamily: "Plus Jakarta Sans",
-                    fontSize: "16px",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "24px",
-                  }}
-                >
-                  {curLocation.label}
-                </Typography>
-              ) : null}
-              {curViolation !== null ? (
-                <Typography
-                  style={{
-                    color: "#919EAB",
-                    fontFamily: "Plus Jakarta Sans",
-                    fontSize: "16px",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "24px",
-                  }}
-                >
-                  {curViolation.label}
-                </Typography>
-              ) : null}
-            </Stack>
+
             <div
               style={{
                 display: "flex",
