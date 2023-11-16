@@ -34,7 +34,7 @@ export const SidebarCloseHover = () => {
           </div>
           <div className="link-2">
             <img src={report} className="icon-instance-node" />
-            <div className="text-wrapper">Support</div>
+            <div className="text-wrapper">Report</div>
           </div>
           <div className="link">
             <img src={support} className="icon-instance-node" />
