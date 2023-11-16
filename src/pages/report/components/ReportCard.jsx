@@ -1331,10 +1331,15 @@ const ReportCard = ({ dummyReport }) => {
                     ? openIcon
                     : inprogress
                 }
-                style={{ marginLeft: "6px", marginTop: "8px" }}
+                style={{ marginLeft: "12px", marginTop: "8px" }}
               />
             </div>
-            <Stack width="100%" direction="row" justifyContent="flex-end">
+            <Stack
+              width="100%"
+              direction="row"
+              justifyContent="flex-end"
+              marginTop="-2px"
+            >
               <IconButton
                 style={{ marginLeft: "0px" }}
                 onClick={() => setOpen(true)}
@@ -1351,7 +1356,7 @@ const ReportCard = ({ dummyReport }) => {
                 onClick={handleOpenMenu}
                 style={{ marginLeft: "0px", marginRight: "6px" }}
               >
-                <MoreVertIcon />
+                <MoreVertIcon style={{ color: "#919EAB" }} />
               </IconButton>
               <Menu
                 // id="basic-menu"
