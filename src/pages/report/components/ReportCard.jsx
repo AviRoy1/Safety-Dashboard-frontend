@@ -142,9 +142,9 @@ const ReportCard = ({ dummyReport }) => {
   function stringAvatar(name) {
     return {
       sx: {
-        // bgcolor: stringToColor(name),
-        bgcolor: "#ECECFE",
-        color: "#4040F2",
+        bgcolor: stringToColor(name),
+        // bgcolor: "#ECECFE",
+        // color: "#4040F2",
       },
       children: name.includes(" ")
         ? `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
@@ -169,6 +169,7 @@ const ReportCard = ({ dummyReport }) => {
     }
     setOpen(open);
     setState({ ...state, [anchor]: open });
+    setAssignCurrent(null);
   };
   const isLargeScreen = useMediaQuery("(min-width:768px)");
   const toggleDrawerMeeting = (anchor, open) => (event) => {
@@ -463,79 +464,48 @@ const ReportCard = ({ dummyReport }) => {
           >
             Status
           </Typography>
-          {/* <Autocomplete
-            style={{ margin: "10px" }}
-            disablePortal
-            id="status"
-            options={status}
-            sx={{ width: 250 }}
-            onChange={(event, value) => {
-              setStatusCurrent(value);
-            }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Status"
-                sx={{
-                  // backgroundColor: "blue",
-                  fontFamily: "Plus Jakarta Sans",
-                  fontSize: "16px",
-                  fontWeight: "400",
-                  lineHeight: "24px",
-                  width: "100%",
-                  border: "none",
-                  outline: "none",
-                  display: "flex",
-                  direction: "column",
-                }}
-              />
-            )}
-          /> */}
 
-          <FormControl sx={{ m: 1, width: 300 }}>
-            <InputLabel id="demo-multiple-chip-label">Status</InputLabel>
+          <FormControl sx={{ width: 300, padding: 0, marginLeft: "7px" }}>
+            <InputLabel id="status">Status</InputLabel>
             <Select
-              labelId="demo-multiple-chip-label"
-              id="demo-multiple-chip"
-              // multiple
               value={statusCurrent}
               onChange={handleChange}
               style={{ padding: "0px" }}
-              input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+              input={<OutlinedInput id="status" label="Chip" />}
               renderValue={(selected) => (
-                // <Box
-                //   sx={{
-                //     display: "flex",
-                //     flexWrap: "wrap",
-                //     padding: "0px",
-                //     margin: "0px",
-                //     gap: 0.5,
-                //     color: "#28A745",
-                //     width: "100px",
-                //     height: "31px",
-                //     fontSize: "14px",
-                //     fontFamily: "Plus Jakarta Sans",
-                //     fontStyle: "normal",
-                //     fontWeight: 700,
-                //     lineHeight: "20px",
-                //     backgroundColor: "#E2F7E6",
-                //     alignItems: "center",
-                //     justifyContent: "center",
-                //   }}
-                // >
-                //   {/* <Chip key={selected} label={selected} /> */}
-                //   <Typography>{selected}</Typography>
-                // </Box>
-                <img
-                  src={
-                    selected === "Resolved"
-                      ? resolved
-                      : selected === "Open"
-                      ? openIcon
-                      : inprogress
-                  }
-                  style={{ margin: "8px" }}
-                />
+                <div style={{ display: "inline-block", marginLeft: "13px" }}>
+                  <Box
+                    height={30}
+                    padding="4px 8px"
+                    borderRadius={4}
+                    bgcolor={
+                      selected === "Open"
+                        ? "#FFF3D6"
+                        : selected === "Resolved"
+                        ? "#F3FFF6"
+                        : "#E0F1F5"
+                    }
+                    width="auto"
+                  >
+                    <Typography
+                      style={{
+                        fontFamily: "Plus Jakarta Sans",
+                        fontSize: 14,
+                        fontStyle: "normal",
+                        fontWeight: 700,
+                        lineHeight: "20px",
+                        color:
+                          selected === "Open"
+                            ? "#694100"
+                            : selected === "Resolved"
+                            ? "#006100"
+                            : "#005278",
+                      }}
+                    >
+                      {selected}
+                    </Typography>
+                  </Box>
+                </div>
               )}
               MenuProps={MenuProps}
             >
@@ -550,6 +520,51 @@ const ReportCard = ({ dummyReport }) => {
               ))}
             </Select>
           </FormControl>
+        </div>
+        <div>
+          <Typography
+            style={{
+              margin: "10px",
+              marginTop: "13px",
+              fontFamily: "Plus Jakarta Sans",
+              fontSize: "14px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "20px",
+            }}
+          >
+            Assign
+          </Typography>
+
+          <Autocomplete
+            style={{
+              margin: "10px",
+              marginTop: "10px",
+              fontFamily: "Plus Jakarta Sans",
+              fontSize: "14px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "20px",
+              width: 300,
+            }}
+            disablePortal
+            id="assign"
+            options={assign}
+            getOptionLabel={(option) => option.label}
+            onChange={(event, value) => {
+              setAssignCurrent(value);
+            }}
+            renderInput={(params) => <TextField {...params} label="Assign" />}
+            renderOption={(props, option) => (
+              <Box component="li" {...props}>
+                <Avatar
+                  {...stringAvatar(`${option.label} ${option.label}`)}
+                  style={{ width: "30px", height: "30px", marginRight: "10px" }}
+                />
+                {option.label}
+              </Box>
+            )}
+          />
         </div>
         <div>
           <Typography
@@ -570,45 +585,11 @@ const ReportCard = ({ dummyReport }) => {
             disablePortal
             id="tags"
             options={tags}
-            sx={{ width: 250 }}
+            sx={{ width: 300 }}
             onChange={(event, value) => {
               setTagCurrent(value);
             }}
             renderInput={(params) => <TextField {...params} label="Tag" />}
-          />
-        </div>
-        <div>
-          <Typography
-            style={{
-              margin: "10px",
-              marginTop: "13px",
-              fontFamily: "Plus Jakarta Sans",
-              fontSize: "14px",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "20px",
-            }}
-          >
-            Assign
-          </Typography>
-          <Autocomplete
-            style={{
-              margin: "10px",
-              marginTop: "10px",
-              fontFamily: "Plus Jakarta Sans",
-              fontSize: "14px",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "20px",
-            }}
-            disablePortal
-            id="assign"
-            options={assign}
-            sx={{ width: 250 }}
-            onChange={(event, value) => {
-              setAssignCurrent(value);
-            }}
-            renderInput={(params) => <TextField {...params} label="Assign" />}
           />
         </div>
 
@@ -1319,7 +1300,7 @@ const ReportCard = ({ dummyReport }) => {
                 marginLeft: "2px",
               }}
             >
-              #{dummyReport._id.slice(-4)}
+              #{dummyReport._id.slice(-7)}
             </Typography>
 
             <div style={{ marginTop: "-9px" }}>
