@@ -56,7 +56,6 @@ export const addNewComment = (id, comment) => async (dispatch) => {
         withCredentials: true,
       }
     );
-    console.log(data);
     dispatch({ type: "addCommentSuccess", payload: data });
   } catch (error) {
     dispatch({

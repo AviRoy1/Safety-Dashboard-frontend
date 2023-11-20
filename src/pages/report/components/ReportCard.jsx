@@ -777,60 +777,6 @@ const ReportCard = ({ dummyReport }) => {
         </Stack>
         {/* <Divider style={{ marginTop: "16px" }} /> */}
       </div>
-
-      <Stack
-        direction="column"
-        justifyContent="space-between"
-        alignItems="flex-start"
-      >
-        <Stack
-          direction="column"
-          justifyContent="flex-start"
-          alignItems="flex-start"
-          margin="12px"
-          height={"490px"}
-        >
-          <Typography
-            style={{
-              fontFamily: "Plus Jakarta Sans",
-              fontSize: "14px",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "20px",
-            }}
-          >
-            Date
-          </Typography>
-        </Stack>
-
-        <div
-          style={{
-            width: "100%",
-            height: "50px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.4)",
-            display: "flex",
-            justifyContent: "flex-end",
-            alignItems: "flex-start",
-          }}
-        >
-          <Button
-            variant="text"
-            style={{
-              fontFamily: "Plus Jakarta Sans",
-              fontSize: "14px",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "20px",
-              color: "#4040F2",
-              marginTop: "15px",
-              marginRight: "10px",
-            }}
-            onClick={handleAddComment}
-          >
-            Post
-          </Button>
-        </div>
-      </Stack>
     </Box>
   );
 
@@ -1119,6 +1065,7 @@ const ReportCard = ({ dummyReport }) => {
                 marginLeft: "16px",
               }}
               placeholder="Enter text here"
+              onChange={(e) => setNewComment(e.target.value)}
             />
             <Button
               variant="text"
