@@ -68,7 +68,7 @@ export const reportReducer = createReducer(
     },
     addCommentSuccess: (state, action) => {
       state.loading = false;
-      state.allReports = action.payload;
+      state.allReports = action.payload.reports;
       state.message = action.payload.message;
     },
     addCommentFailed: (state, action) => {
