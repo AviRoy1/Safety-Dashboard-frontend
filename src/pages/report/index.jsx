@@ -38,6 +38,7 @@ import notificationIcon from "./components/images/notification.jpg";
 import dropdown from "./components/images/dropdown.png";
 import userIcon from "./components/images/userIcon.png";
 import rightArrow from "./components/images/rightArrow.jpg";
+import { server } from "../../redux/store";
 
 const ColoredAutocomplete = styled(Autocomplete)(({ theme }) => ({
   // You can specify your custom styling here
@@ -112,6 +113,25 @@ const ReportPage = () => {
   }, dispatch);
 
   // console.log(allReports);
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(
+        `${server}/report/download-pdf?location=${curLocation?.label}&status=${curStatus?.label}&tag=${curTag?.label}&violationType=${curViolation?.label}`
+      );
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "reports.pdf");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error downloading PDF:", error);
+    }
+  };
 
   useEffect(() => {
     dispatch(findReports(curLocation, curStatus, curTag, curViolation));
@@ -285,7 +305,7 @@ const ReportPage = () => {
                       borderWidth: "1px",
                       textTransform: "none",
                     }}
-                    // onClick={handleDownload}
+                    onClick={handleDownload}
                   >
                     Download
                     <img
